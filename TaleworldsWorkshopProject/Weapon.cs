@@ -29,7 +29,7 @@ public class Weapon
     {
         _maxHealth = 100; // Initial maximum health of the weapon
         _health = _maxHealth; // Set current health to maximum health
-        _attackPower = 10; // Initial base attack power of the weapon
+        _attackPower = 50; // Initial base attack power of the weapon
         _random = new Random(); // Initialize the random number generator
     }
 
@@ -38,11 +38,11 @@ public class Weapon
     {
         if (_health > 0)
         {
-            int healthReduction = _random.Next(1, 3); // Random health reduction between 5 and 15
+            int healthReduction = _random.Next(1, 30); // Random health reduction between 5 and 15
             _health -= healthReduction;
             if (_health < 0) _health = 0; // Ensure health doesn't go below 0
 
-            int attackReduction = _random.Next(1, 3); // Random attack power reduction between 1 and 5
+            int attackReduction = _random.Next(1,5 ); // Random attack power reduction between 1 and 5
             int currentAttackPower = CalculateAttackPower() - attackReduction;
             if (currentAttackPower < 0) currentAttackPower = 0; // Ensure attack power doesn't go below 0
 

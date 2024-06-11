@@ -7,6 +7,8 @@ public class Enemy
     private int _health;
     private int _attackPower;
 
+    private Random _random = new Random();
+
     public string Name { get => _name; }
     public int Health { get => _health; }
     public int AttackPower { get => _attackPower; }
@@ -28,6 +30,6 @@ public class Enemy
     // Method to attack
     public int Attack()
     {
-        return _attackPower;
+        return _random.Next(_attackPower-5, _attackPower+6);
     }
 }
