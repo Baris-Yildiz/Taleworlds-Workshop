@@ -1,4 +1,4 @@
-﻿using TaleworldsWorkshopProject;
+﻿
 
 public class Game
 {
@@ -15,21 +15,48 @@ public class Game
             return _instance;
         }
     }
+            
+    
 
     private static Game? _instance;
 
 
-    public void StartGame()
+    public  void StartGame()
     {
         Console.WriteLine("Started new game");
+        Console.WriteLine("Oyuncu OLuşturuldu");
+
+
     }
 
-    public void Help()
+    public  void Help()
     {
         Console.WriteLine("Help page!");
+        Console.WriteLine("\n===== OYUN Tanıtımı =====");
+        List<string> gameRules = new List<string>
+            {
+                "Oyunda 3 tip düşman var." +
+                "final boss hariç diğer düşmanlardan kaçma imkanı var." +
+                "Tur aralarında shopdan item alabilirsiniz." +
+                "10 Tip silah mevcuttur."+
+                "Silahlar zamanla kırılabilir."
+              
+                
+            };
+
+        
+        gameRules.ForEach(rule => Console.WriteLine(rule));
+
+        Console.WriteLine("\nİyi oyunlar!");
+
+
+
+
+
+
     }
 
-    public void ExitGame()
+    public  void ExitGame()
     {
         Console.WriteLine("Exited game");
         _instance = null;
@@ -62,11 +89,6 @@ public class Inventory
 
 
 public class Items
-{
-
-}
-
-public class Weapon : Item
 {
 
 }
