@@ -17,16 +17,16 @@ public class Game
             
     private static Game? _instance;
 
-    private int _currentTurnIndex = 0;
+    private int _currentTurnIndex = 1;
     private Turn _currentTurn;
+
+    private Shop _currentShop;
 
 
     public void StartGame()
     {
         Console.WriteLine("Started new game");
-        Console.WriteLine("Oyuncu OLuşturuldu");
-        CombatScene combatScene = new CombatScene();
-        combatScene.StartCombat();
+        Advance();
     }
 
     public  void Help()
@@ -61,7 +61,17 @@ public class Game
     // bir sonraki tura geçer.
     public void Advance()
     {
-        _currentTurn = new Turn(_currentTurnIndex++);
+
+        if (_currentTurnIndex % 3 == 0)
+        {
+            _currentShop = new Shop();
+        } else
+        {
+            _currentTurn = new Turn(_currentTurnIndex);
+        }
+
+        _currentTurnIndex++;
+        
     }
 
     public void Escape()
@@ -71,7 +81,8 @@ public class Game
 
     public void SelectEnemy(int index)
     {
-
+        CombatScene combatScene = new CombatScene(_currentTurn.Enemies[index]);
+        combatScene.StartCombat();
     }
 
    public static void Main(string[] args)

@@ -1,9 +1,11 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Text;
 
 public class Shop
 {
     WeaponProperties[] _weaponProperties;
     Random _randomNumberGenerator = new Random();
+    List<int> pickedIndexes = new List<int>();
 
     // shop constructorı içinde random 3 weapon belirlenir ve sunulur.
     public Shop()
@@ -12,7 +14,13 @@ public class Shop
 
         for (int i = 0; i < _weaponProperties.Length; i++)
         {
-            _weaponProperties[i] = new WeaponProperties("test " + i, _randomNumberGenerator.Next(10,100), _randomNumberGenerator.Next(1,10), _randomNumberGenerator.Next(50, 500));
+            int randomIndex = _randomNumberGenerator.Next(0, EntityFactory.weaponsInGame.Length);
+            while (pickedIndexes.Contains(randomIndex))
+            {
+                randomIndex = _randomNumberGenerator.Next(0, EntityFactory.weaponsInGame.Length);
+            }
+            pickedIndexes.Add(randomIndex);
+            _weaponProperties[i] = EntityFactory.weaponsInGame[randomIndex];
         }
 
         _showItems();
@@ -26,7 +34,7 @@ public class Shop
         for (int i = 0; i < _weaponProperties.Length; i++)
         {
             WeaponProperties weapon = _weaponProperties[i];
-            prompt.Append(weapon.description());
+            prompt.Append("( " + i + " ) " + weapon.description());
         }
 
         Console.WriteLine(prompt.ToString());

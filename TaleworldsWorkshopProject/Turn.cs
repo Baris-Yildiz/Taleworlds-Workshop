@@ -2,8 +2,13 @@
 public class Turn
 {
     private int _turnIndex;
+    public Enemy[] Enemies { get => _enemies; }
     private Enemy[] _enemies = new Enemy[3];
+
     public static int maxTurns = 20;
+
+    private Random _randomNumberGenerator = new Random();
+    List<int> pickedIndexes = new List<int>();
 
     // yeni bir tur oluşturur.
     public Turn(int turnIndex)
@@ -11,7 +16,14 @@ public class Turn
         _turnIndex = turnIndex;
         for (int i = 0; i < _enemies.Length; i++)
         {
-            _enemies[i] = new Enemy("test");
+            int randomIndex = _randomNumberGenerator.Next(0, EntityFactory.enemiesInGame.Length);
+            while (pickedIndexes.Contains(randomIndex))
+            {
+                randomIndex = _randomNumberGenerator.Next(0, EntityFactory.enemiesInGame.Length);
+            }
+            pickedIndexes.Add(randomIndex);
+
+            _enemies[i] = EntityFactory.enemiesInGame[randomIndex];
         }
 
         WriteTurn();
@@ -26,7 +38,7 @@ public class Turn
         for (int i = 0; i < _enemies.Length; i++)
         {
             Enemy enemy = _enemies[i];
-            prompt.Append(" ( " + i + " ) " + enemy.Name + " with " + enemy.AttackPower + " attack power.\n");
+            prompt.Append(" ( " + i + " ) " + enemy.Name + " with " + enemy.AttackPower + " attack power and " + enemy.Health + " hp.\n");
         }
 
         prompt.Append("You can attack the enemy with index x using the attack(x) method.\n");

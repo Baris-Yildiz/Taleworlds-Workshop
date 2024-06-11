@@ -1,14 +1,17 @@
 ﻿public class CombatScene
 {
+    Enemy enemy;
+
+
+    public CombatScene(Enemy enemy)
+    {
+        this.enemy = enemy;
+    }
 
     public void StartCombat()
     {
         Player player = Player.Instance;
-        int round = 1;
 
-        Enemy enemy = new Enemy($"Enemy{round}");
-
-        Console.WriteLine($"\nRound {round}");
         while (player.Health > 0 && enemy.Health > 0)
         {
             //enemy attacks player
@@ -35,11 +38,8 @@
 
         if (player.Health > 0)
         {
-            Console.WriteLine("Enemy defeated! Proceeding to the next round.");
-            
+            Console.WriteLine("Enemy defeated! Proceeding to the next turn.");
         }
-
-    
     }
 }
 
