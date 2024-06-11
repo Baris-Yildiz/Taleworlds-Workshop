@@ -24,7 +24,8 @@
 
     public void Help()
     {
-        Console.WriteLine("Help page");
+        Console.WriteLine("Help page!");
+
     }
 
     public void ExitGame()
