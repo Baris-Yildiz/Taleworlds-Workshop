@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TaleworldsWorkshopProject
+﻿
+public class Enemy
 {
-    internal class Enemy
+    public string Name { get => _name; }
+    private string _name;
+
+    public int AttackPower { get => _attackPower; }
+    private int _attackPower;
+
+    public Enemy(string name)
     {
+        _name = name;
     }
 }
+
+
+
