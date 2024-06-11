@@ -1,7 +1,9 @@
-﻿public class Game
+﻿using TaleworldsWorkshopProject;
+
+public class Game
 {
     private Game() { }
-
+    
     public static Game Instance
     {
         get
@@ -25,25 +27,19 @@
     public void Help()
     {
         Console.WriteLine("Help page!");
-
     }
 
     public void ExitGame()
     {
         Console.WriteLine("Exited game");
         _instance = null;
+        
     }
 
     static void Main(string[] args)
     {
         // Display the number of command line arguments.
     }
-}
-
-
-public class Player
-{
-
 }
 
 
@@ -64,11 +60,6 @@ public class Inventory
 
 }
 
-
-public class Item
-{
-
-}
 
 public class Items
 {
