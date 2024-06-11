@@ -68,32 +68,3 @@ public class Game
         // Display the number of command line arguments.
     }
 }
-
-
-public class Enemy
-{
-
-}
-
-
-public class Boss
-{
-
-}
-
-
-public class Inventory
-{
-
-}
-
-
-public class Items
-{
-
-}
-
-public class Shop
-{
-
-}
