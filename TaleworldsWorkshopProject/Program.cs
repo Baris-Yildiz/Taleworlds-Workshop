@@ -25,6 +25,8 @@ public class Game
     {
         Console.WriteLine("Started new game");
         Console.WriteLine("Oyuncu OLuşturuldu");
+        CombatScene combatScene = new CombatScene();
+        combatScene.StartCombat();
 
 
     }
@@ -63,8 +65,10 @@ public class Game
         
     }
 
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
+        Game game = Game.Instance;
+        game.StartGame();
         // Display the number of command line arguments.
     }
 }

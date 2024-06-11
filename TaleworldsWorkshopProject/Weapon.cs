@@ -7,6 +7,7 @@ public class Weapon
     private int _maxHealth;
     private Inventory _inventory = null;
     private Random _random;
+    private Player _player;
 
 
     //Oyuncumuza Player.Instance olarak erişebiliyoruz ve sadece 1 tane oyuncumuz olabiliyor.
@@ -59,7 +60,7 @@ public class Weapon
     }
 
     // Method to calculate the current attack power based on the weapon's health
-    private int CalculateAttackPower()
+    public int CalculateAttackPower()
     {
         return (int)((double)_health / _maxHealth * _attackPower);
     }
