@@ -1,24 +1,27 @@
 ﻿using System.Text;
-using System.Xml.Linq;
-
 public class Turn
 {
     private int _turnIndex;
     private Enemy[] _enemies = new Enemy[3];
     public static int maxTurns = 20;
 
-    public Turn()
+    // yeni bir tur oluşturur.
+    public Turn(int turnIndex)
     {
+        _turnIndex = turnIndex;
         for (int i = 0; i < _enemies.Length; i++)
         {
             _enemies[i] = new Enemy("test");
         }
+
+        WriteTurn();
     }
 
-    public override string ToString()
+    // turda karşılaşılan düşmanları yazdırır ve seçenekler playera gösterilir.
+    public void WriteTurn()
     {
         StringBuilder prompt = new StringBuilder();  
-        prompt.Append("Turn: " + _turnIndex + " / " + maxTurns + " \nThere are three enemies: ");
+        prompt.Append("Turn: " + _turnIndex + " / " + maxTurns + " \nThere are three enemies: \n");
 
         for (int i = 0; i < _enemies.Length; i++)
         {
@@ -26,9 +29,10 @@ public class Turn
             prompt.Append(" ( " + i + " ) " + enemy.Name + " with " + enemy.AttackPower + " attack power.\n");
         }
 
+        prompt.Append("You can attack the enemy with index x using the attack(x) method.\n");
         prompt.Append("You can instead escape using the escape() method.\n");
 
-        return prompt.ToString();
+        Console.WriteLine(prompt.ToString());   
     }
 
 }
