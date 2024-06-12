@@ -30,6 +30,6 @@ public class Enemy
     // Method to attack
     public int Attack()
     {
-        return _random.Next(_attackPower-5, _attackPower+6);
+        return _random.Next((int)(_attackPower * 9.0/10.0), (int)(_attackPower * 11.0 / 10.0));
     }
 }

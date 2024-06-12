@@ -42,8 +42,8 @@ public class Turn
             prompt.Append(" ( " + i + " ) " + enemy.Name + " with " + enemy.AttackPower + " attack power and " + enemy.Health + " hp.\n");
         }
 
-        prompt.Append("You can attack the enemy with index x using the attack(x) method.\n");
-        prompt.Append("You can instead escape using the escape() method.\n");
+        prompt.Append("You can attack the enemy with index x using the Game.SelectEnemy(x) method.\n");
+        prompt.Append("You can instead escape using the Game.Escape() method.\n");
 
         Console.WriteLine(prompt.ToString());   
     }
