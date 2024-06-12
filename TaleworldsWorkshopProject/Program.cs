@@ -17,10 +17,14 @@ public class Game
             
     private static Game? _instance;
 
-    private int _currentTurnIndex = 1;
+    private int _currentTurnIndex = 9;
     private Turn _currentTurn;
 
     private Shop _currentShop;
+
+    private bool _inBossTurn = false;
+    private BossTurn _currentBossTurn;
+    private int _currentBossTurnIndex = 1;
 
     public bool GameStarted { get => _gameStarted; }
     private bool _gameStarted = false;
@@ -33,8 +37,6 @@ public class Game
 
     private bool _escaped = false;
     int escapeAmount = 0;
-
-    private bool _inBossTurn = false;
 
     public void StartGame()
     {
@@ -113,13 +115,18 @@ public class Game
 
         _inShop = false;
         _inTurn = false;
+        _inBossTurn = false;
 
         if (_currentTurnIndex % 3 == 0)
         {
             _inShop = true;
             _currentShop = new Shop();
-        }
-        else
+        } else if (_currentTurnIndex % 10 == 0)
+        {
+            _inBossTurn = true;
+            _currentBossTurn = new BossTurn(_currentBossTurnIndex++);
+
+        } else
         {
             _inTurn = true;
             _currentTurn = new Turn(_currentTurnIndex);
@@ -192,15 +199,40 @@ public class Game
 
     public void BuyWeapon(int index)
     {
+        if (!_inShop || !_gameStarted)
+        {
+            Console.WriteLine("Invalid command.");
+            return;
+        }
+
         if (index > 2)
         {
             Console.WriteLine("Select either 0,1 or 2 as index");
             return;
         }
 
-        
         WeaponProperties weaponProperties = _currentShop.WeaponProperties[index];
         Player.Instance.BuyWeapon(weaponProperties);
+    }
+
+    public void FightBoss()
+    {
+        if (!_inBossTurn)
+        {
+            Console.WriteLine("Invalid command.");
+            return;
+        }
+
+        Enemy boss = _currentBossTurn.Boss;
+        CombatScene combatScene = new CombatScene(new Enemy(boss.Name, boss.Health, boss.AttackPower));
+        combatScene.StartCombat();
+
+        if (_gameStarted)
+        {
+            _escaped = true;
+            Advance();
+        }
+        
     }
 
     public static void Main(string[] args)
