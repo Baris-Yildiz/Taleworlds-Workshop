@@ -54,27 +54,69 @@ public class Game
 
     public  void Help()
     {
+        Console.WriteLine("\n===== HELP MENU =====");
+        List<string> helpOptions = new List<string>
+            {
+                "1. Exit Game",
+                "2. Start Game",
+                "3. Game Rules"
+            };
+
+        helpOptions.ForEach(option => Console.WriteLine(option));
+
+        Console.WriteLine("Please choose an option:");
+
+        string input = Console.ReadLine();
+        switch (input)
+        {
+            case "1":
+                ExitGame();
+                break;
+            case "2":
+                StartGame();
+                break;
+                case "3":
+                ShowGameRules();
+                break;
+            default:
+                Console.WriteLine("Invalid option. Returning to the game.");
+                break;
+        }
+
+
+
         if (_gameStarted)
         {
             Console.WriteLine("The help menu cannot be accessed while the game is running!");
             return; 
         }
 
-        Console.WriteLine("\n===== OYUN Tanıtımı =====");
+       
+
+        
+
+        Console.WriteLine("\nİyi oyunlar!");
+    }
+    private void ShowGameRules()
+    {
+        Console.WriteLine("\n===== OYUN TANITIMI =====");
         List<string> gameRules = new List<string>
             {
-                "Oyunda 3 tip düşman var." ,
-                "final boss hariç diğer düşmanlardan kaçma imkanı var." ,
-                "Tur aralarında shopdan item alabilirsiniz." ,
-                "10 Tip silah mevcuttur.",
-                "Silahlar zamanla kırılabilir."
-              
-                
+                "Oyunda 3 tip düşman var.",
+                "Her tur istediğin düşmanı seçebilirsin",
+                "Final boss hariç diğer düşmanlardan kaçma imkanı var.",
+                "Tur aralarında shopdan item alabilirsiniz.",
+                "6 Tip silah mevcuttur.",
+                "Silahlar zamanla kırılabilir.",
+                "Enemy ile Fight sırasında sadece bir silah kullanabilirsin;eğer bu kullandığın silah kırılırsa default olarak yumruk kullanırsın (yumruk kırılamaz ve hep aynı hasarı vurur)",
+
+
+
             };
 
         gameRules.ForEach(rule => Console.WriteLine(rule));
-
-        Console.WriteLine("\nİyi oyunlar!");
+        Console.WriteLine("\nReturning to help menu...");
+        Help();
     }
 
     public void ExitGame()
