@@ -26,11 +26,11 @@ private int _health;
    
     private Player()
     {
-        _gold = 0;
+        _gold = 500;
         _inventory = new List<Weapon>();
         _health = 100;
         _attackPower = 10;
-        _currentWeapon = new Weapon("Fist", 1, int.MaxValue, 0, true);
+        _currentWeapon = Weapon.Instance;
         _inventory.Add(_currentWeapon);// Add Fist as default weapon
     }
 
@@ -58,26 +58,27 @@ private int _health;
     }
     private void SwitchToFist()
     {
-        _currentWeapon = new Weapon("Fist", 1, int.MaxValue, 0, true);
+        Weapon.Instance.ChangeWeapon(new WeaponProperties("Fist", 1, int.MaxValue, 0));
+
     }
     public void EarnGold(int amount)
     {
         _gold += amount;
         Console.WriteLine($"Player earned {amount} gold. Total gold: {_gold}");
     }
-    public void BuyWeapon(Weapon weapon)
+    public void BuyWeapon(WeaponProperties weaponProperties)
     {
-        if (_gold >= weapon.Cost)
+        if (_gold >= weaponProperties.Cost)
         {
-            _gold -= weapon.Cost;
-            _inventory.Add(weapon);
-            Console.WriteLine($"Bought {weapon.Name} for {weapon.Cost} gold.");
+            _gold -= weaponProperties.Cost;
+            Weapon.Instance.ChangeWeapon(weaponProperties); 
+            Console.WriteLine($"Bought {weaponProperties.Name} for {weaponProperties.Cost} gold.");
         }
         else
         {
             Console.WriteLine("Not enough gold to buy this weapon.");
         }
-}
+    }
 
     private static void _destroyPlayer()
     {

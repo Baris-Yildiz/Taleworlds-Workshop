@@ -77,7 +77,7 @@ public class Game
         Console.WriteLine("\nİyi oyunlar!");
     }
 
-    public  void ExitGame()
+    public void ExitGame()
     {
         if (!_gameStarted)
         {
@@ -198,8 +198,9 @@ public class Game
             return;
         }
 
+        
         WeaponProperties weaponProperties = _currentShop.WeaponProperties[index];
-        Weapon.Instance.ChangeWeapon(weaponProperties);
+        Player.Instance.BuyWeapon(weaponProperties);
     }
 
     public static void Main(string[] args)

@@ -43,19 +43,6 @@ public class Weapon
         _isFist = false;
     }
 
-    // Method to use the weapon
-
-    public Weapon(string name, int attackPower, int maxHealth, int cost, bool isFist = false)
-    {
-        _name = name;
-        _attackPower = attackPower;
-        _maxHealth = maxHealth;
-        _health = maxHealth;
-        _cost = cost;
-        _random = new Random();
-        _isFist = isFist;
-    }
-
     public int Health { get => _health; }
     public int AttackPower { get => _attackPower; }
 
@@ -99,6 +86,7 @@ public class Weapon
     private void BreakWeapon()
     {
         Console.WriteLine("Weapon has broken!");
+        _isFist = true;
         // Logic to remove the weapon from inventory or disable it
         _health = 0;
     }
@@ -107,6 +95,7 @@ public class Weapon
     {
         _health = _maxHealth = weaponProperties.Durability;
         _attackPower = weaponProperties.AttackPower;
+        _isFist = false;
     }
 }
 
