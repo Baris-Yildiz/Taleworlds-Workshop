@@ -1,7 +1,8 @@
 ﻿namespace TaleworldsWorkshopProject;
 public class EntityFactory
 {
-    public static Enemy[] enemiesInGame =
+    public static IReadOnlyList<Enemy> EnemiesInGame => _enemiesInGame;
+    private static Enemy[] _enemiesInGame = 
     {
         new Enemy("Goblin", 50, 4),
         new Enemy("Dwarf", 20, 10),
@@ -11,7 +12,8 @@ public class EntityFactory
         new Enemy("Zombie", 110, 8)
     };
 
-    public static WeaponProperties[] weaponsInGame =
+    public static IReadOnlyList<WeaponProperties> WeaponsInGame => _weaponsInGame;
+    private static WeaponProperties[] _weaponsInGame =
     {
         new WeaponProperties("Rusty Sword", 100, 10, 50),
         new WeaponProperties("Silver Sword", 150, 20, 70),
@@ -21,7 +23,8 @@ public class EntityFactory
         new WeaponProperties("Nunchaku", 300, 30, 250)
     };
 
-    public static Enemy[] bosses =
+    public static IReadOnlyList<Enemy> BossesInGame => _bossesInGame;
+    private static Enemy[] _bossesInGame =
     {
         new Enemy("Boss1", 500, 100),
         new Enemy("Boss2", 1500, 300),

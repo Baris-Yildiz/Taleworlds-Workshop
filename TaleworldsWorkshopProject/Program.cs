@@ -22,20 +22,19 @@ public class Game
 
     private Shop _currentShop;
 
-    public static bool GameStarted { get => _gameStarted; }
-    private static bool _gameStarted = false;
+    public bool GameStarted { get => _gameStarted; }
+    private bool _gameStarted = false;
 
-    public static bool InTurn { get => _inTurn; }
-    private static bool _inTurn = false;
+    public bool InTurn { get => _inTurn; }
+    private bool _inTurn = false;
 
-    public static bool InShop { get => _inShop; }
-    private static bool _inShop = false;
+    public bool InShop { get => _inShop; }
+    private bool _inShop = false;
 
-    private static bool _escaped = false;
+    private bool _escaped = false;
     int escapeAmount = 0;
 
-    private static bool _inBossTurn = false;
-
+    private bool _inBossTurn = false;
 
     public void StartGame()
     {
@@ -44,7 +43,7 @@ public class Game
             return;
         }
 
-
+        
         _gameStarted = true;
         Console.WriteLine("Started new game! Advancing to the first turn.");
 
@@ -89,6 +88,7 @@ public class Game
         Console.WriteLine("Exited game");
         _instance = null;
         _gameStarted=false;
+        _instance = Game.Instance;
     }
 
     // bir sonraki tura geçer.
@@ -98,6 +98,11 @@ public class Game
         {
             Console.WriteLine("The game hasn't started yet!");
             return;
+        }
+
+        if (_inShop)
+        {
+            _escaped = true;
         }
 
         if (!_escaped)
@@ -121,6 +126,7 @@ public class Game
         }
 
         _currentTurnIndex++;
+        _escaped = false;
     }
 
     public void Escape()
@@ -131,9 +137,9 @@ public class Game
             return;
         }
 
-        if (escapeAmount > 3)
+        if (escapeAmount > 2)
         {
-            Console.WriteLine("You cannot escape any more times.");
+            Console.WriteLine("You've escaped enough.");
             return;
         }
 
@@ -145,9 +151,11 @@ public class Game
 
         if (_inTurn)
         {
+            escapeAmount++;
+            Console.WriteLine("One escape used. Remaining escapes: " + (3 - escapeAmount));
+
             _escaped = true;
             Advance();
-            _escaped = false;
         } else
         {
             Console.WriteLine("You cannot escape from here.");
@@ -174,11 +182,24 @@ public class Game
             return;
         }
 
-        CombatScene combatScene = new CombatScene(_currentTurn.Enemies[index]);
+        Enemy enemy = _currentTurn.Enemies[index]; 
+        CombatScene combatScene = new CombatScene(new Enemy(enemy.Name, enemy.Health, enemy.AttackPower));
         combatScene.StartCombat();
+
         _escaped = true;
         Advance();
-        _escaped = false;
+    }
+
+    public void BuyWeapon(int index)
+    {
+        if (index > 2)
+        {
+            Console.WriteLine("Select either 0,1 or 2 as index");
+            return;
+        }
+
+        WeaponProperties weaponProperties = _currentShop.WeaponProperties[index];
+        Weapon.Instance.ChangeWeapon(weaponProperties);
     }
 
     public static void Main(string[] args)
