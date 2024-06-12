@@ -17,7 +17,7 @@ public class Game
             
     private static Game? _instance;
 
-    private int _currentTurnIndex = 9;
+    private int _currentTurnIndex = 1;
     private Turn _currentTurn;
 
     private Shop _currentShop;
@@ -57,6 +57,7 @@ public class Game
     public  void Help()
     {
         Console.WriteLine("\n===== HELP MENU =====");
+        
         List<string> helpOptions = new List<string>
             {
                 "1. Exit Game",
@@ -68,7 +69,8 @@ public class Game
 
         Console.WriteLine("Please choose an option:");
 
-        string input = Console.ReadLine();
+        //string input = Console.ReadLine();
+        string input = "3";
         switch (input)
         {
             case "1":
@@ -93,10 +95,6 @@ public class Game
             return; 
         }
 
-       
-
-        
-
         Console.WriteLine("\nİyi oyunlar!");
     }
     private void ShowGameRules()
@@ -117,8 +115,8 @@ public class Game
             };
 
         gameRules.ForEach(rule => Console.WriteLine(rule));
-        Console.WriteLine("\nReturning to help menu...");
-        Help();
+        //Console.WriteLine("\nReturning to help menu...");
+        //Help();
     }
 
     public void ExitGame()

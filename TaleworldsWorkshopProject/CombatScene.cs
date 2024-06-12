@@ -10,6 +10,7 @@ public class CombatScene
 
     public void StartCombat()
     {
+        Console.WriteLine($"Player vs {enemy.Name}! Let the fight begin!\n");
         Player player = Player.Instance;
 
         while (player.Health > 0 && enemy.Health > 0)
