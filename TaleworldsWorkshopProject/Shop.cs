@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Text;
-
+namespace TaleworldsWorkshopProject;
 public class Shop
 {
     WeaponProperties[] _weaponProperties;

@@ -1,3 +1,4 @@
-﻿public class Inventory
+﻿namespace TaleworldsWorkshopProject;
+public class Inventory
 {
 }

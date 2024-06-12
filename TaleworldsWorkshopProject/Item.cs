@@ -1,3 +1,4 @@
-﻿public class Item
+﻿namespace TaleworldsWorkshopProject;
+public class Item
 {
 }

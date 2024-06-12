@@ -1,4 +1,5 @@
-﻿public class EntityFactory
+﻿namespace TaleworldsWorkshopProject;
+public class EntityFactory
 {
     public static Enemy[] enemiesInGame =
     {

@@ -1,4 +1,5 @@
 ﻿using System.Text;
+namespace TaleworldsWorkshopProject;
 // silah özellikleri belirten bir class. Shoplar ve düşmanlar bunu düşürür, alınırsa envantere eklenir ve kullanılırsa Weapon özelliklerine kopyalanır
 public struct WeaponProperties
 {

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿namespace TaleworldsWorkshopProject;
+using System.Text;
 public class Turn
 {
     private int _turnIndex;

@@ -1,5 +1,5 @@
 ﻿using System;
-
+namespace TaleworldsWorkshopProject;
 public class Weapon
 {
     private int _health;

@@ -1,3 +1,4 @@
-﻿public class Boss
+﻿namespace TaleworldsWorkshopProject;
+public class Boss
 {
 }

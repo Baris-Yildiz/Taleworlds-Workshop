@@ -1,4 +1,5 @@
-﻿public class CombatScene
+﻿namespace TaleworldsWorkshopProject;
+public class CombatScene
 {
     Enemy enemy;
 

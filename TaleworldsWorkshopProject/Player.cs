@@ -1,4 +1,4 @@
-﻿
+﻿namespace TaleworldsWorkshopProject;
 public class Player
 {
     private int _health;
