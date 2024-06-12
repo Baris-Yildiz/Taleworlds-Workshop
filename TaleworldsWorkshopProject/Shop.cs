@@ -3,7 +3,9 @@ using System.Text;
 namespace TaleworldsWorkshopProject;
 public class Shop
 {
-    WeaponProperties[] _weaponProperties;
+    public IReadOnlyList<WeaponProperties> WeaponProperties { get => _weaponProperties; }
+    private WeaponProperties[] _weaponProperties;
+
     Random _randomNumberGenerator = new Random();
     List<int> pickedIndexes = new List<int>();
 
@@ -14,30 +16,30 @@ public class Shop
 
         for (int i = 0; i < _weaponProperties.Length; i++)
         {
-            int randomIndex = _randomNumberGenerator.Next(0, EntityFactory.weaponsInGame.Length);
+            int randomIndex = _randomNumberGenerator.Next(0, EntityFactory.WeaponsInGame.Count);
             while (pickedIndexes.Contains(randomIndex))
             {
-                randomIndex = _randomNumberGenerator.Next(0, EntityFactory.weaponsInGame.Length);
+                randomIndex = _randomNumberGenerator.Next(0, EntityFactory.WeaponsInGame.Count);
             }
             pickedIndexes.Add(randomIndex);
-            _weaponProperties[i] = EntityFactory.weaponsInGame[randomIndex];
+            _weaponProperties[i] = EntityFactory.WeaponsInGame[randomIndex];
         }
 
-        _showItems();
+        Console.WriteLine(_shopDescription());
     }
 
     // shoptaki itemleri konsola yazdırır.
-    private void _showItems()
+    private string _shopDescription()
     {
         StringBuilder prompt = new StringBuilder(); 
 
         for (int i = 0; i < _weaponProperties.Length; i++)
         {
             WeaponProperties weapon = _weaponProperties[i];
-            prompt.Append("( " + i + " ) " + weapon.description());
+            prompt.Append("( " + i + " ) " + weapon.Description);
         }
 
-        Console.WriteLine(prompt.ToString());
+        return prompt.ToString();
     }
 
     //shoptan item almak için

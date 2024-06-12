@@ -14,6 +14,8 @@ public struct WeaponProperties
 
     public int Cost { get => _cost; }
     private int _cost;
+
+    public string Description { get => _description(); }
     //düşmandan düşerse cost = 0.
     public WeaponProperties(string name, int power, int durability, int cost)
     {
@@ -23,7 +25,7 @@ public struct WeaponProperties
         _cost = cost;   
     }
     // weapon açıklaması. düşmandan düştüyse cost = 0 old. için açıklama değişir.
-    public string description()
+    private string _description()
     {
         string description = Name + " with " + AttackPower + " attack power and " + Durability + " durability.";
         if (Cost == 0)

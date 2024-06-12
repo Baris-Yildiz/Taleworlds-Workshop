@@ -72,6 +72,12 @@ public class Weapon
         // Logic to remove the weapon from inventory or disable it
         _health = 0;
     }
+
+    public void ChangeWeapon(WeaponProperties weaponProperties)
+    {
+        _health = _maxHealth = weaponProperties.Durability;
+        _attackPower = weaponProperties.AttackPower;
+    }
 }
 
 

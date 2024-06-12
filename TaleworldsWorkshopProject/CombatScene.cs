@@ -3,7 +3,6 @@ public class CombatScene
 {
     Enemy enemy;
 
-
     public CombatScene(Enemy enemy)
     {
         this.enemy = enemy;
@@ -29,8 +28,8 @@ public class CombatScene
             //player attacks enemy 
             Console.WriteLine($"Player attacks {enemy.Name}");
             int playerAttackPower=player.Attack();
-            enemy.TakeDamage(player.Attack());
-            Console.WriteLine($"Enemy takes {playerAttackPower} damage. {enemy.Name} Enemy  health: {enemy.Health}");
+            enemy.TakeDamage(playerAttackPower);
+            Console.WriteLine($"Enemy takes {playerAttackPower} damage. {enemy.Name} health: {enemy.Health}");
             if (enemy.Health <= 0)
             {
                 Console.WriteLine($"{enemy.Name} is dead.");
