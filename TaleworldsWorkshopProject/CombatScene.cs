@@ -34,6 +34,7 @@ public class CombatScene
             if (enemy.Health <= 0)
             {
                 Console.WriteLine($"{enemy.Name} is dead.");
+                player.EarnGold(10);
             }
         }
 

@@ -1,14 +1,23 @@
 ﻿using System;
+using System.Xml.Linq;
 namespace TaleworldsWorkshopProject;
 public class Weapon
 {
+    private string _name;
     private int _health;
     private int _attackPower;
     private int _maxHealth;
     private Inventory _inventory = null;
     private Random _random;
     private Player _player;
+    private bool _isFist;
+    private int _cost;
 
+
+
+
+    public int Cost { get => _cost; }
+    public string Name { get => _name; }
 
     //Oyuncumuza Player.Instance olarak erişebiliyoruz ve sadece 1 tane oyuncumuz olabiliyor.
     public static Weapon Instance
@@ -31,11 +40,32 @@ public class Weapon
         _health = _maxHealth; // Set current health to maximum health
         _attackPower = 50; // Initial base attack power of the weapon
         _random = new Random(); // Initialize the random number generator
+        _isFist = false;
     }
 
     // Method to use the weapon
+
+    public Weapon(string name, int attackPower, int maxHealth, int cost, bool isFist = false)
+    {
+        _name = name;
+        _attackPower = attackPower;
+        _maxHealth = maxHealth;
+        _health = maxHealth;
+        _cost = cost;
+        _random = new Random();
+        _isFist = isFist;
+    }
+
+    public int Health { get => _health; }
+    public int AttackPower { get => _attackPower; }
+
     public void UseWeapon()
     {
+        if (_isFist)
+        {
+            Console.WriteLine("Using Fist. Attack power is fixed.");
+            return;
+        }
         if (_health > 0)
         {
             int healthReduction = _random.Next(1, 30); // Random health reduction between 5 and 15
@@ -62,7 +92,7 @@ public class Weapon
     // Method to calculate the current attack power based on the weapon's health
     public int CalculateAttackPower()
     {
-        return (int)((double)_health / _maxHealth * _attackPower);
+        return _isFist ? _attackPower : (int)((double)_health / _maxHealth * _attackPower);
     }
 
     // Method to handle weapon breaking
