@@ -2,6 +2,7 @@
 using System.Text;
 public class Turn
 {
+    
 
     public static bool CallFromTurn { get => _callFromTurn; }
     private static bool _callFromTurn;
@@ -21,7 +22,7 @@ public class Turn
             Console.WriteLine("Invalid.");
             return;
         }
-
+       
         _turnIndex = turnIndex;
         for (int i = 0; i < _enemies.Length; i++)
         {
@@ -60,15 +61,19 @@ public class Turn
     private void StartTurn()
     {
         Console.WriteLine($"Turn {_turnIndex} / 30 started.");
-        _callFromTurn = true;
-        Player.Instance.PowerUp(1 + _turnIndex * 0.1); // Her turda oyuncuyu güçlendir
-        
-        foreach (var enemy in _enemies)
-        {
-            enemy.PowerUp(1 + _turnIndex * 0.1); // Her turda düşmanları güçlendir
+        if (_turnIndex > 1 ) {
+            _callFromTurn = true;
+            Player.Instance.PowerUp(1 + _turnIndex * 0.1); // Her turda oyuncuyu güçlendir
+
+            foreach (var enemy in _enemies)
+            {
+                enemy.PowerUp(1 + _turnIndex * 0.1); // Her turda düşmanları güçlendir
+            }
+
+            _callFromTurn = false;
         }
-        _callFromTurn = false;
     }
+
     private void ListEnemies()
     {
         Console.WriteLine("Enemies in this turn:");
@@ -78,4 +83,5 @@ public class Turn
             Console.WriteLine($"({index++}) {enemy.Name} - Health: {enemy.Health}, Attack Power: {enemy.AttackPower}");
         }
     }
+   
 }

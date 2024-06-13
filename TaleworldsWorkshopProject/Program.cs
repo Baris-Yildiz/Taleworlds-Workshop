@@ -176,7 +176,7 @@ public class Game
         {
             escapeAmount++;
             Console.WriteLine($"One escape used. Remaining escapes: {3 - escapeAmount}");
-
+             
             _escaped = true;
             Advance();
         } else
@@ -204,12 +204,12 @@ public class Game
             Console.WriteLine("Select either 0,1 or 2 as index");
             return;
         }
-
+        _callFromGame = true;
         Enemy enemy = _currentTurn.Enemies[index]; 
 
         CombatScene combatScene = new CombatScene(new Enemy(enemy.Name, enemy.Health, enemy.AttackPower));
 
-        _callFromGame = true;
+        
         combatScene.StartCombat();
         _callFromGame = false;
 

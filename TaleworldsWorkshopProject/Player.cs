@@ -127,7 +127,7 @@ public class Player
         }
         _health = (int)(_health * factor);
         _attackPower = (int)(_attackPower * factor);
-        _gold = (int)(_gold * factor);
+        
 
         _callFromPlayer = true;
         _currentWeapon.PowerUp(factor);
