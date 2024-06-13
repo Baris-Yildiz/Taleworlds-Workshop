@@ -34,30 +34,14 @@ public class Turn
             }
             pickedIndexes.Add(randomIndex);
 
-            _enemies[i] = EntityFactory.EnemiesInGame[randomIndex];
+            Enemy enemy = EntityFactory.EnemiesInGame[randomIndex];
+            _enemies[i] = new Enemy(enemy.Name, enemy.Health, enemy.AttackPower);
         }
 
         StartTurn();
         ListEnemies();
     }
 
-    // turda karşılaşılan düşmanları yazdırır ve seçenekler playera gösterilir.
-    private string _turnDescription()
-    {
-        StringBuilder prompt = new StringBuilder();
-        prompt.Append("\nTurn: " + _turnIndex + " / 30\nThere are three enemies: \n");
-
-        for (int i = 0; i < _enemies.Length; i++)
-        {
-            Enemy enemy = _enemies[i];
-            prompt.Append(" ( " + i + " ) " + enemy.Name + " with " + enemy.AttackPower + " attack power and " + enemy.Health + " hp.\n");
-        }
-
-        prompt.Append("You can attack the enemy with index x using the Game.SelectEnemy(x) method.\n");
-        prompt.Append("You can instead escape using the Game.Escape() method.\n");
-
-        return prompt.ToString();
-    }
     // Her tur başladığında oyuncu ve düşmanları güçlendiren yöntem
     private void StartTurn()
     {

@@ -61,7 +61,7 @@ public class Shop
     {
         StringBuilder prompt = new StringBuilder();
 
-        prompt.AppendLine("Player encounters a shop! There are 3 items inside waiting to be wielded by a master.");
+        prompt.AppendLine("\nPlayer encounters a shop! There are 3 items inside waiting to be wielded by a master.");
         prompt.AppendLine("------------------------SHOP------------------------");
         for (int i = 0; i < _weaponProperties.Length; i++)
         {
@@ -69,11 +69,11 @@ public class Shop
             prompt.Append($"({i}) {weapon.Description}");
         }
 
-        prompt.AppendLine("You can buy one of these weapons and equip it using the Game.Instance.BuyWeapon() method.");
-        prompt.AppendLine($"You can buy a Health Potion for {healthPotion.Cost} gold using the Game.Instance.BuyHealthPotion() method.");
-        prompt.AppendLine($"You can buy an Attack Potion for {attackPotion.Cost} gold using the Game.Instance.BuyAttackPotion() method.");
+        prompt.AppendLine("\nYou can buy one of these weapons and equip it using the Game.Instance.BuyWeapon() method.");
+        prompt.AppendLine($"\nYou can buy a Health Potion for {healthPotion.Cost} gold using the Game.Instance.BuyHealthPotion() method.");
+        prompt.AppendLine($"\nYou can buy an Attack Potion for {attackPotion.Cost} gold using the Game.Instance.BuyAttackPotion() method.");
 
-        prompt.AppendLine($"Exit the shop and Advance to the next turn using Game.Instance.Advance().");
+        prompt.AppendLine($"Exit the shop and advance to the next turn using Game.Instance.Advance().");
         prompt.AppendLine("---------------------END OF SHOP---------------------");
 
         return prompt.ToString();

@@ -133,7 +133,7 @@ public class Player
         _currentWeapon.PowerUp(factor);
         _callFromPlayer = false;
 
-        Console.WriteLine($"Player powered up! Health: {_health}, Attack Power: {_attackPower}, Gold: {_gold}");
+        Console.WriteLine($"Player powered up! Health: {_health}, Attack Power: {_attackPower}");
     }
 
     public void HealPlayer(Potion potion)
@@ -168,6 +168,17 @@ public class Player
         _gold -= potion.Cost;
         _attackPower += potion.EffectRatio;
         Weapon.Instance.BuffWeapon(potion.EffectRatio);
+    }
+
+    public void ResetPlayer()
+    {
+        if (!Game.CallFromGame)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
+
+        _instance = null;
     }
 }
 

@@ -63,9 +63,9 @@ public class Weapon
             int currentAttackPower = CalculateAttackPower() - attackReduction;
             if (currentAttackPower < 0) currentAttackPower = 0; // Ensure attack power doesn't go below 0
 
-            Console.WriteLine($"Weapon used. Current health: {_health}, Current attack power: {currentAttackPower}");
+            Console.WriteLine($"Weapon used. Current weapon health: {_health}, Current weapon attack power: {currentAttackPower}");
 
-            if (_health <= 0)
+            if (_health == 0)
             {
                 BreakWeapon();
             }
@@ -85,7 +85,7 @@ public class Weapon
     // Method to handle weapon breaking
     private void BreakWeapon()
     {
-        Console.WriteLine("Weapon has broken!");
+        Console.WriteLine("Weapon has been broken!");
         _isFist = true;
         // Logic to remove the weapon from inventory or disable it
         _health = 0;
@@ -111,9 +111,7 @@ public class Weapon
             return;
         }
         _attackPower = (int)(_attackPower * factor);
-        _maxHealth = (int)(_maxHealth * factor);
-        _health = (int)(_health * factor);
-        Console.WriteLine($"Weapon powered up! Attack Power: {_attackPower}, Durability: {_maxHealth}");
+        Console.WriteLine($"Weapon powered up! Attack Power: {_attackPower}");
     }
 
     public void BuffWeapon(int amount)
@@ -124,8 +122,19 @@ public class Weapon
             return;
         }
         _attackPower += amount;
-      
     }
+
+    public void ResetWeapon()
+    {
+        if (!Game.CallFromGame)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
+
+        _instance = null;
+    }
+
 }
 
 

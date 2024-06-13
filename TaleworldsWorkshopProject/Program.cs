@@ -77,7 +77,7 @@ public class Game
                 "Every third turn, there is a shop where you can buy weapons and potions with gold.",
                 "Every tenth turn, there is a mini-boss and at the end, you fight the final boss.",
                 "Every other turn, you pick from three random enemies to fight with. The enemies get increasingly more difficult. You can also choose to escape.",
-                "If you escape, you will not get a buff at the start of the next turn. Enemies always get a buff at the start of a turn.",
+                "Enemies and player always gets buffed at the start of turns.",
                 "Weapons have durabilities and they can break down in the middle of a combat. If your weapon breaks down, you use your fists. You can change weapons by buying a new one from the shop."
             };
 
@@ -92,6 +92,11 @@ public class Game
             Console.WriteLine("No game to exit from.");
             return;
         }
+
+        _callFromGame = true;
+        Player.Instance.ResetPlayer();
+        Weapon.Instance.ResetWeapon();
+        _callFromGame = false;
 
         Console.WriteLine("Exited game");
         _instance = null;
