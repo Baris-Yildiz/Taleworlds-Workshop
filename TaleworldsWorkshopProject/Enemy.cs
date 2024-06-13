@@ -50,6 +50,5 @@ public class Enemy
         }
         _health = (int)(_health * factor);
         _attackPower = (int)(_attackPower * factor);
-        Console.WriteLine($"Enemy powered up! Health: {_health}, Attack Power: {_attackPower}");
     }
 }

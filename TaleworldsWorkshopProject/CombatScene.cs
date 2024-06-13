@@ -23,7 +23,7 @@ public class CombatScene
         }
 
         _callFromCombatScene = true;
-        Console.WriteLine("-----------------------COMBAT-----------------------");
+        Console.WriteLine("-----------------------COMBAT-----------------------\n");
         Console.WriteLine($"Player vs {enemy.Name}! Let the fight begin!\n");
         Player player = Player.Instance;
 
@@ -33,7 +33,7 @@ public class CombatScene
             Console.WriteLine($"{enemy.Name} attacks Player");
             int enemyAttackPower = enemy.Attack();
             player.TakeDamage(enemyAttackPower);
-            Console.WriteLine($"Player takes {enemyAttackPower} damage. Player health: {player.Health}");
+            Console.WriteLine($"Player takes {enemyAttackPower} damage. Player health: {player.Health}\n");
             if (player.Health <= 0)
             {
                 Console.WriteLine("Player is dead. Game Over.");
@@ -44,7 +44,7 @@ public class CombatScene
             Console.WriteLine($"Player attacks {enemy.Name}");
             int playerAttackPower=player.Attack();
             enemy.TakeDamage(playerAttackPower);
-            Console.WriteLine($"Enemy takes {playerAttackPower} damage. {enemy.Name} health: {enemy.Health}");
+            Console.WriteLine($"Enemy takes {playerAttackPower} damage. {enemy.Name} health: {enemy.Health}\n");
             if (enemy.Health <= 0)
             {
                 Console.WriteLine($"{enemy.Name} is dead.");
@@ -56,7 +56,7 @@ public class CombatScene
         {
             Console.WriteLine("Enemy defeated! Proceeding to the next turn.");
         }
-        Console.WriteLine("--------------------END OF COMBAT--------------------");
+        Console.WriteLine("\n--------------------END OF COMBAT--------------------");
         _callFromCombatScene = false;
     }
 }
