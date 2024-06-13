@@ -28,8 +28,8 @@ private int _health;
     {
         _gold = 500;
         _inventory = new List<Weapon>();
-        _health = 100;
-        _attackPower = 10;
+        _health = 150;
+        _attackPower = 20;
         _currentWeapon = Weapon.Instance;
         _inventory.Add(_currentWeapon);// Add Fist as default weapon
     }
@@ -79,7 +79,14 @@ private int _health;
             Console.WriteLine("Not enough gold to buy this weapon.");
         }
     }
-
+    public void PowerUp(double factor)
+    {
+        _health = (int)(_health * factor);
+        _attackPower = (int)(_attackPower * factor);
+        _gold = (int)(_gold * factor);
+        _currentWeapon.PowerUp(factor);
+        Console.WriteLine($"Player powered up! Health: {_health}, Attack Power: {_attackPower}, Gold: {_gold}");
+    }
     private static void _destroyPlayer()
     {
         _instance = null;

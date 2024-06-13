@@ -31,7 +31,7 @@ public class Turn
     // turda karşılaşılan düşmanları yazdırır ve seçenekler playera gösterilir.
     private string _turnDescription()
     {
-        StringBuilder prompt = new StringBuilder();  
+        StringBuilder prompt = new StringBuilder();
         prompt.Append("\nTurn: " + _turnIndex + " / 30\nThere are three enemies: \n");
 
         for (int i = 0; i < _enemies.Length; i++)
@@ -44,5 +44,27 @@ public class Turn
         prompt.Append("You can instead escape using the Game.Escape() method.\n");
 
         return prompt.ToString();
+    }
+    // Her tur başladığında oyuncu ve düşmanları güçlendiren yöntem
+    public void StartTurn()
+    {
+        Console.WriteLine($"Turn {_turnIndex} started.");
+        Player.Instance.PowerUp(1 + _turnIndex * 0.1); // Her turda oyuncuyu güçlendir
+        foreach (var enemy in _enemies)
+        {
+            enemy.PowerUp(1 + _turnIndex * 0.1); // Her turda düşmanları güçlendir
+        }
+    }
+    public void EndTurn()
+    {
+        Console.WriteLine($"Turn {_turnIndex} ended.");
+    }
+    public void ListEnemies()
+    {
+        Console.WriteLine("Enemies in this turn:");
+        foreach (var enemy in _enemies)
+        {
+            Console.WriteLine($"{enemy.Name} - Health: {enemy.Health}, Attack Power: {enemy.AttackPower}");
+        }
     }
 }
