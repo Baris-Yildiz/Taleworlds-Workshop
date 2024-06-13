@@ -49,10 +49,9 @@ public class Game
             Console.WriteLine("The game has already started!");
             return;
         }
-
         
         _gameStarted = true;
-        Console.WriteLine("Started new game! Advancing to the first turn.");
+        Console.WriteLine("\nStarted a new game! Advancing to the first turn.\n");
 
         _callFromGame = true;
         _currentTurn = new Turn(_currentTurnIndex++);
@@ -67,26 +66,24 @@ public class Game
             Console.WriteLine("The help menu cannot be accessed while the game is running!");
             return;
         }
-
-        Console.WriteLine("\n----------------------HELP MENU----------------------");
         ShowGameRules();
-        Console.WriteLine("\nİyi oyunlar!");
+        Console.WriteLine("Good luck!");
     }
     private void ShowGameRules()
     {
-        Console.WriteLine("\n===== OYUN TANITIMI =====");
+        Console.WriteLine("\n----------------------GAME RULES----------------------");
         List<string> gameRules = new List<string>
             {
-                "Oyunda 3 tip düşman var.",
-                "Her tur istediğin düşmanı seçebilirsin",
-                "Bosslar hariç diğer düşmanlardan kaçma imkanı var.",
-                "Tur aralarında shopdan item alabilirsiniz.",
-                "6 Tip silah mevcuttur.",
-                "Silahlar zamanla kırılabilir.",
-                "Enemy ile Fight sırasında sadece bir silah kullanabilirsin;eğer bu kullandığın silah kırılırsa default olarak yumruk kullanırsın (yumruk kırılamaz ve hep aynı hasarı vurur)",
+                "The game consists of 30 turns.",
+                "Every third turn, there is a shop where you can buy weapons and potions with gold.",
+                "Every tenth turn, there is a mini-boss and at the end, you fight the final boss.",
+                "Every other turn, you pick from three random enemies to fight with. The enemies get increasingly more difficult. You can also choose to escape.",
+                "If you escape, you will not get a buff at the start of the next turn. Enemies always get a buff at the start of a turn.",
+                "Weapons have durabilities and they can break down in the middle of a combat. If your weapon breaks down, you use your fists. You can change weapons by buying a new one from the shop."
             };
 
         gameRules.ForEach(rule => Console.WriteLine(rule));
+        Console.WriteLine("-------------------END OF GAME RULES-------------------\n");
     }
 
     public void ExitGame()
@@ -100,7 +97,6 @@ public class Game
         Console.WriteLine("Exited game");
         _instance = null;
         _gameStarted=false;
-        _instance = Game.Instance;
     }
 
     // bir sonraki tura geçer.
@@ -205,11 +201,12 @@ public class Game
             return;
         }
 
+        _callFromGame = true;
         Enemy enemy = _currentTurn.Enemies[index]; 
 
         CombatScene combatScene = new CombatScene(new Enemy(enemy.Name, enemy.Health, enemy.AttackPower));
 
-        _callFromGame = true;
+        
         combatScene.StartCombat();
         _callFromGame = false;
 
@@ -271,11 +268,17 @@ public class Game
         Potion healthPotion = _currentShop.HealthPotion;
         Player player = Player.Instance;
 
+        if (healthPotion.Cost > Player.Instance.Gold)
+        {
+            Console.WriteLine($"You don't have enough gold to buy that. Current Gold: {Player.Instance.Gold}");
+            return;
+        }
+
         _callFromGame = true;
-        Player.Instance.HealPlayer((int)(healthPotion.EffectRatio * player.Health * 0.01f));
+        Player.Instance.HealPlayer(healthPotion);
         _callFromGame = false;
 
-        Console.WriteLine($"Healed player for %{(int)healthPotion.EffectRatio}.");
+        Console.WriteLine($"Healed player for {healthPotion.EffectRatio}.\nRemaining Gold: {Player.Instance.Gold} Current Health: {Player.Instance.Health}");
     }
 
     public void BuyAttackPotion()
@@ -287,10 +290,17 @@ public class Game
         }
 
         Potion attackPotion = _currentShop.AttackPotion;
+        
+        if (attackPotion.Cost > Player.Instance.Gold)
+        {
+            Console.WriteLine($"You don't have enough gold to buy that. Current Gold: {Player.Instance.Gold}");
+            return;
+        }
+
         _callFromGame = true;
-        Weapon.Instance.BuffWeapon((int)(attackPotion.EffectRatio * Weapon.Instance.AttackPower * 0.01f));
+        Player.Instance.BuffWeapon(attackPotion);
         _callFromGame = false;
-        Console.WriteLine($"Buffed weapon for %{(int)attackPotion.EffectRatio}.");
+        Console.WriteLine($"Buffed weapon for {attackPotion.EffectRatio}.\nRemaining Gold: {Player.Instance.Gold} Current Attack Power: {Weapon.Instance.AttackPower}");
     }
 
     public static void Main(string[] args)

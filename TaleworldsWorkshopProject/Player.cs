@@ -136,14 +136,16 @@ public class Player
         Console.WriteLine($"Player powered up! Health: {_health}, Attack Power: {_attackPower}, Gold: {_gold}");
     }
 
-    public void HealPlayer(int amount)
-
+    public void HealPlayer(Potion potion)
     {
         if (!Game.CallFromGame)
         {
             Console.WriteLine("Invalid.");
             return;
         }
+
+        int amount = potion.EffectRatio;
+        _gold -= potion.Cost;
 
         if (_health + amount > _initialHealth)
         {
@@ -152,6 +154,20 @@ public class Player
         {
             _health += amount;
         }
+        
+    }
+
+    public void BuffWeapon(Potion potion)
+    {
+        if (!Game.CallFromGame)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
+
+        _gold -= potion.Cost;
+        _attackPower += potion.EffectRatio;
+        Weapon.Instance.BuffWeapon(potion.EffectRatio);
     }
 }
 

@@ -9,8 +9,8 @@
         }
 
         private Type _type;
-        public float EffectRatio { get => _effectRatio; }
-        private float _effectRatio;
+        public int EffectRatio { get => _effectRatio; }
+        private int _effectRatio;
 
         public int Cost { get => _cost; }
         private int _cost;
@@ -20,7 +20,7 @@
         public Potion(Type type, int cost) {
             
             _type = type;
-            _effectRatio = (float)(_random.NextDouble() * 20.0); 
+            _effectRatio = _random.Next(10, 30);
             _cost = cost;
         } 
     }
