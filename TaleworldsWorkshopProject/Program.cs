@@ -54,7 +54,6 @@ public class Game
         Console.WriteLine("\nStarted a new game! Advancing to the first turn.\n");
 
         _callFromGame = true;
-        _currentTurn = new Turn(_currentTurnIndex++);
         _callFromGame = false;
         _inTurn = true;
     }
@@ -125,10 +124,12 @@ public class Game
 
         if (_currentTurnIndex % 3 == 0)
         {
+           
             _inShop = true;
             _callFromGame = true;
-            _currentShop = new Shop();
+            _currentShop = new Shop(_currentTurnIndex);
             _callFromGame = false;
+
         } else if (_currentTurnIndex % 10 == 0)
         {
             _inBossTurn = true;

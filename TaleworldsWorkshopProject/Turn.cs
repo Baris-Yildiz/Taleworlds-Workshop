@@ -2,8 +2,8 @@
 using System.Text;
 public class Turn
 {
-    
 
+   
     public static bool CallFromTurn { get => _callFromTurn; }
     private static bool _callFromTurn;
 
@@ -17,6 +17,7 @@ public class Turn
     // yeni bir tur oluşturur.
     public Turn(int turnIndex)
     {
+        
         if (!Game.CallFromGame)
         {
             Console.WriteLine("Invalid.");
@@ -69,7 +70,7 @@ public class Turn
             {
                 enemy.PowerUp(1 + _turnIndex * 0.1); // Her turda düşmanları güçlendir
             }
-
+            
             _callFromTurn = false;
         }
     }
