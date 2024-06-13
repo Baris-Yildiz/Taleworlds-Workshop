@@ -1,11 +1,11 @@
 ﻿namespace TaleworldsWorkshopProject;
 public class Player
 {
-private int _health;
+    private int _health;
     private int _attackPower;
-    private List<Weapon> _inventory;
     private Weapon _currentWeapon;
     private int _gold;
+    private int _initialHealth;
     //Oyuncumuza Player.Instance olarak erişebiliyoruz ve sadece 1 tane oyuncumuz olabiliyor.
     public static Player Instance
     {
@@ -27,11 +27,11 @@ private int _health;
     private Player()
     {
         _gold = 500;
-        _inventory = new List<Weapon>();
         _health = 150;
         _attackPower = 20;
+        _health = _initialHealth = 100;
+        _attackPower = 10;
         _currentWeapon = Weapon.Instance;
-        _inventory.Add(_currentWeapon);// Add Fist as default weapon
     }
 
     public int Health { get => _health; }
@@ -59,7 +59,6 @@ private int _health;
     private void SwitchToFist()
     {
         Weapon.Instance.ChangeWeapon(new WeaponProperties("Fist", 1, int.MaxValue, 0));
-
     }
     public void EarnGold(int amount)
     {
@@ -79,6 +78,7 @@ private int _health;
             Console.WriteLine("Not enough gold to buy this weapon.");
         }
     }
+
     public void PowerUp(double factor)
     {
         _health = (int)(_health * factor);
@@ -87,11 +87,18 @@ private int _health;
         _currentWeapon.PowerUp(factor);
         Console.WriteLine($"Player powered up! Health: {_health}, Attack Power: {_attackPower}, Gold: {_gold}");
     }
-    private static void _destroyPlayer()
-    {
-        _instance = null;
-    }
 
+    public void HealPlayer(int amount)
+
+    {
+        if (_health + amount > _initialHealth)
+        {
+            _health = _initialHealth;
+        } else
+        {
+            _health += amount;
+        }
+    }
 }
 
 

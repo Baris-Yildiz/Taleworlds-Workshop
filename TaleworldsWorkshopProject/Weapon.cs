@@ -7,7 +7,6 @@ public class Weapon
     private int _health;
     private int _attackPower;
     private int _maxHealth;
-    private Inventory _inventory = null;
     private Random _random;
     private Player _player;
     private bool _isFist;
@@ -97,12 +96,19 @@ public class Weapon
         _attackPower = weaponProperties.AttackPower;
         _isFist = false;
     }
+
     public void PowerUp(double factor)
     {
         _attackPower = (int)(_attackPower * factor);
         _maxHealth = (int)(_maxHealth * factor);
         _health = (int)(_health * factor);
         Console.WriteLine($"Weapon powered up! Attack Power: {_attackPower}, Durability: {_maxHealth}");
+    }
+
+    public void BuffWeapon(int amount)
+    {
+        _attackPower += amount;
+      
     }
 }
 
