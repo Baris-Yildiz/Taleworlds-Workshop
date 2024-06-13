@@ -31,6 +31,4 @@ public class EntityFactory
         new Enemy("Final Boss", 5000, 600)
     };
 
-
-
 }

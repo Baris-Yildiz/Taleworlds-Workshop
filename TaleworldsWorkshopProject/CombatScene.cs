@@ -10,6 +10,7 @@ public class CombatScene
 
     public void StartCombat()
     {
+        Console.WriteLine("-----------------------COMBAT-----------------------");
         Console.WriteLine($"Player vs {enemy.Name}! Let the fight begin!\n");
         Player player = Player.Instance;
 
@@ -42,6 +43,7 @@ public class CombatScene
         {
             Console.WriteLine("Enemy defeated! Proceeding to the next turn.");
         }
+        Console.WriteLine("--------------------END OF COMBAT--------------------");
     }
 }
 

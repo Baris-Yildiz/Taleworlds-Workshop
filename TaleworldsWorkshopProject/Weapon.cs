@@ -97,6 +97,11 @@ public class Weapon
         _attackPower = weaponProperties.AttackPower;
         _isFist = false;
     }
+
+    public void BuffWeapon(int amount)
+    {
+        _attackPower += amount;
+    }
 }
 
 

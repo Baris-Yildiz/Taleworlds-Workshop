@@ -74,7 +74,7 @@ public class Game
             {
                 "Oyunda 3 tip düşman var.",
                 "Her tur istediğin düşmanı seçebilirsin",
-                "Final boss hariç diğer düşmanlardan kaçma imkanı var.",
+                "Bosslar hariç diğer düşmanlardan kaçma imkanı var.",
                 "Tur aralarında shopdan item alabilirsiniz.",
                 "6 Tip silah mevcuttur.",
                 "Silahlar zamanla kırılabilir.",
@@ -164,7 +164,7 @@ public class Game
         if (_inTurn)
         {
             escapeAmount++;
-            Console.WriteLine("One escape used. Remaining escapes: " + (3 - escapeAmount));
+            Console.WriteLine($"One escape used. Remaining escapes: {3 - escapeAmount}");
 
             _escaped = true;
             Advance();
@@ -238,6 +238,34 @@ public class Game
             Advance();
         }
         
+    }
+
+    public void BuyHealthPotion()
+    {
+        if (!_inShop)
+        {
+            Console.WriteLine("No health potion here.");
+            return;
+        }
+
+        Potion healthPotion = _currentShop.HealthPotion;
+        Player player = Player.Instance;
+
+        Player.Instance.HealPlayer((int)(healthPotion.EffectRatio * player.Health * 0.01f));
+        Console.WriteLine($"Healed player for %{(int)healthPotion.EffectRatio}.");
+    }
+
+    public void BuffWeapon()
+    {
+        if (!_inShop)
+        {
+            Console.WriteLine("No attack potion here.");
+            return;
+        }
+
+        Potion attackPotion = _currentShop.AttackPotion;
+        Weapon.Instance.BuffWeapon((int)(attackPotion.EffectRatio * Weapon.Instance.AttackPower * 0.01f));
+        Console.WriteLine($"Buffed weapon for %{(int)attackPotion.EffectRatio}.");
     }
 
     public static void Main(string[] args)
