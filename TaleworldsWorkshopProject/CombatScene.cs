@@ -2,6 +2,7 @@
 public class CombatScene
 {
     Enemy enemy;
+    Random _random = new Random();
     public static bool CallFromCombatScene { get => _callFromCombatScene; }
     private static bool _callFromCombatScene;
 
@@ -48,7 +49,7 @@ public class CombatScene
             if (enemy.Health <= 0)
             {
                 Console.WriteLine($"{enemy.Name} is dead.");
-                player.EarnGold(10);
+                player.EarnGold(_random.Next(50,100));
             }
         }
 

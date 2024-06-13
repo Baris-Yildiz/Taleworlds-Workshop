@@ -180,6 +180,11 @@ public class Player
 
         _instance = null;
     }
+
+    public void ShowStats()
+    {
+        Console.WriteLine($"Health: {_health}, Attack Power: {_attackPower}, Gold: {_gold}.\n Weapon Attack Power: {Weapon.Instance.AttackPower}, Durability: {Weapon.Instance.Health}");
+    }
 }
 
 

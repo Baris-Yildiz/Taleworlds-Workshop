@@ -26,9 +26,9 @@ public class EntityFactory
     public static IReadOnlyList<Enemy> BossesInGame => _bossesInGame;
     private static Enemy[] _bossesInGame =
     {
-        new Enemy("Boss1", 500, 80),
-        new Enemy("Boss2", 1000, 120),
-        new Enemy("Final Boss", 2000, 200)
+        new Enemy("Boss1", 400, 30),
+        new Enemy("Boss2", 750, 50),
+        new Enemy("Final Boss", 1000, 60)
     };
 
 }

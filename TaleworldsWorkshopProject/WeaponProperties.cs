@@ -24,13 +24,9 @@ public struct WeaponProperties
         _durability = durability;
         _cost = cost;   
     }
-    public WeaponProperties IncreaseStats(double factor)
+    public void IncreaseStats(double factor)
     {
-        int newAttackPower = (int)(AttackPower * factor);
-        int newDurability = (int)(Durability * factor);
-        int newCost = (int)(Cost * factor);
-
-        return new WeaponProperties(Name, newAttackPower, newDurability, newCost);
+        _attackPower = (int)(AttackPower * factor);
     }
     // weapon açıklaması. düşmandan düştüyse cost = 0 old. için açıklama değişir.
     private string _description()

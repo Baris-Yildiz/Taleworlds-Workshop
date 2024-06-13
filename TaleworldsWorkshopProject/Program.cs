@@ -54,6 +54,7 @@ public class Game
         Console.WriteLine("\nStarted a new game! Advancing to the first turn.\n");
 
         _callFromGame = true;
+        _currentTurn = new Turn(_currentTurnIndex++);
         _callFromGame = false;
         _inTurn = true;
     }
@@ -127,7 +128,14 @@ public class Game
         _inTurn = false;
         _inBossTurn = false;
 
-        if (_currentTurnIndex % 3 == 0)
+        if (_currentBossTurnIndex == 16)
+        {
+            Console.WriteLine("You win!");
+            ExitGame();
+            return ;
+        }
+
+        if (_currentTurnIndex % 4 == 0)
         {
            
             _inShop = true;
@@ -135,7 +143,7 @@ public class Game
             _currentShop = new Shop(_currentTurnIndex);
             _callFromGame = false;
 
-        } else if (_currentTurnIndex % 10 == 0)
+        } else if (_currentTurnIndex % 5 == 0)
         {
             _inBossTurn = true;
             _callFromGame = true;
@@ -246,11 +254,11 @@ public class Game
             Console.WriteLine("Invalid command.");
             return;
         }
-
+        _callFromGame = true;
         Enemy boss = _currentBossTurn.Boss;
         CombatScene combatScene = new CombatScene(new Enemy(boss.Name, boss.Health, boss.AttackPower));
 
-        _callFromGame = true;
+        
         combatScene.StartCombat();
         _callFromGame = false;
 

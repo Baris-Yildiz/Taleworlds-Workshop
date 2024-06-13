@@ -23,9 +23,9 @@ namespace TaleworldsWorkshopProject
         private string _description()
         {
             StringBuilder prompt = new StringBuilder();
-            prompt.Append("----------------------BOSS TURN----------------------");
-            prompt.Append($"Boss Turn {_turnIndex} / 3\n");
-            prompt.Append($"Boss: {_boss.Name} with {_boss.Health} hp and {_boss.AttackPower} attack power.");
+            prompt.AppendLine("----------------------BOSS TURN----------------------");
+            prompt.AppendLine($"Boss Turn {_turnIndex} / 3\n");
+            prompt.AppendLine($"Boss: {_boss.Name} with {_boss.Health} hp and {_boss.AttackPower} attack power.");
 
             return prompt.ToString();
         }

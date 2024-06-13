@@ -45,7 +45,7 @@ public class Turn
     // Her tur başladığında oyuncu ve düşmanları güçlendiren yöntem
     private void StartTurn()
     {
-        Console.WriteLine($"Turn {_turnIndex} / 30 started.");
+        Console.WriteLine($"Turn {_turnIndex} / 15 started.");
         if (_turnIndex > 1 ) {
             _callFromTurn = true;
             Player.Instance.PowerUp(1 + _turnIndex * 0.1); // Her turda oyuncuyu güçlendir

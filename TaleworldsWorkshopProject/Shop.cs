@@ -52,7 +52,7 @@ public class Shop
     {
         for (int i = 0; i < _weaponProperties.Length; i++)
         {
-            _weaponProperties[i] = _weaponProperties[i].IncreaseStats(factor);
+            _weaponProperties[i].IncreaseStats(factor);
         }
     }
 
@@ -60,7 +60,7 @@ public class Shop
     private string _shopDescription()
     {
         StringBuilder prompt = new StringBuilder();
-
+        prompt.Append($"Turn {_turnIndex} / 15 started.");
         prompt.AppendLine("\nPlayer encounters a shop! There are 3 items inside waiting to be wielded by a master.");
         prompt.AppendLine("------------------------SHOP------------------------");
         for (int i = 0; i < _weaponProperties.Length; i++)
