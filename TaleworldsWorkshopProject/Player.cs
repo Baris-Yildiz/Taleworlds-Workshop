@@ -31,6 +31,8 @@ public class Player
     private Player()
     {
         _gold = 500;
+        _health = 150;
+        _attackPower = 20;
         _health = _initialHealth = 100;
         _attackPower = 10;
         _currentWeapon = Weapon.Instance;
@@ -116,7 +118,17 @@ public class Player
         }
     }
 
+    public void PowerUp(double factor)
+    {
+        _health = (int)(_health * factor);
+        _attackPower = (int)(_attackPower * factor);
+        _gold = (int)(_gold * factor);
+        _currentWeapon.PowerUp(factor);
+        Console.WriteLine($"Player powered up! Health: {_health}, Attack Power: {_attackPower}, Gold: {_gold}");
+    }
+
     public void HealPlayer(int amount)
+
     {
         if (!Game.CallFromGame)
         {

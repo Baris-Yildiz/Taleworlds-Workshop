@@ -11,7 +11,7 @@ public class Enemy
     public int Health { get => _health; }
     public int AttackPower { get => _attackPower; }
 
-    public Enemy(string name, int health = 100, int attackPower = 10)
+    public Enemy(string name, int health = 80, int attackPower = 15)
     {
         _name = name;
         _health = health;
@@ -39,6 +39,12 @@ public class Enemy
             return -1;
         }
 
-        return _random.Next((int)(_attackPower * 9.0/10.0), (int)(_attackPower * 11.0 / 10.0));
+        return _random.Next((int)(_attackPower * 0.9), (int)(_attackPower *1.1));
+    }
+    public void PowerUp(double factor)
+    {
+        _health = (int)(_health * factor);
+        _attackPower = (int)(_attackPower * factor);
+        Console.WriteLine($"Enemy powered up! Health: {_health}, Attack Power: {_attackPower}");
     }
 }

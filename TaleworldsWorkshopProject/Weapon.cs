@@ -55,7 +55,7 @@ public class Weapon
         }
         if (_health > 0)
         {
-            int healthReduction = _random.Next(1, 30); // Random health reduction between 5 and 15
+            int healthReduction = _random.Next(1, 20); // Random health reduction between 5 and 15
             _health -= healthReduction;
             if (_health < 0) _health = 0; // Ensure health doesn't go below 0
 
@@ -103,6 +103,14 @@ public class Weapon
         _isFist = false;
     }
 
+    public void PowerUp(double factor)
+    {
+        _attackPower = (int)(_attackPower * factor);
+        _maxHealth = (int)(_maxHealth * factor);
+        _health = (int)(_health * factor);
+        Console.WriteLine($"Weapon powered up! Attack Power: {_attackPower}, Durability: {_maxHealth}");
+    }
+
     public void BuffWeapon(int amount)
     {
         if (!Game.CallFromGame)
@@ -111,6 +119,7 @@ public class Weapon
             return;
         }
         _attackPower += amount;
+      
     }
 }
 

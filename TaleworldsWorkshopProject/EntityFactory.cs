@@ -4,31 +4,31 @@ public class EntityFactory
     public static IReadOnlyList<Enemy> EnemiesInGame => _enemiesInGame;
     private static Enemy[] _enemiesInGame = 
     {
-        new Enemy("Goblin", 50, 4),
-        new Enemy("Dwarf", 20, 10),
-        new Enemy("Spider", 70, 2),
-        new Enemy("Elemental", 100, 10),
-        new Enemy("Assasin", 10, 30),
-        new Enemy("Zombie", 110, 8)
+        new Enemy("Goblin", 60, 10),
+        new Enemy("Dwarf", 80, 15),
+        new Enemy("Spider", 70, 12),
+        new Enemy("Elemental", 100, 20),
+        new Enemy("Assasin", 50, 25),
+        new Enemy("Zombie", 120, 18)
     };
 
     public static IReadOnlyList<WeaponProperties> WeaponsInGame => _weaponsInGame;
     private static WeaponProperties[] _weaponsInGame =
     {
-        new WeaponProperties("Rusty Sword", 100, 40, 50),
-        new WeaponProperties("Silver Sword", 150, 40, 70),
-        new WeaponProperties("Legendary Sword", 1000, 50, 2000),
-        new WeaponProperties("Mace", 200, 50, 500),
-        new WeaponProperties("Katana", 2000, 40, 900),
-        new WeaponProperties("Nunchaku", 300, 35, 250)
+        new WeaponProperties("Rusty Sword", 50, 20, 30),
+        new WeaponProperties("Silver Sword", 70, 40, 50),
+        new WeaponProperties("Legendary Sword", 100, 50, 100),
+        new WeaponProperties("Mace", 60, 35, 30),
+        new WeaponProperties("Katana", 85, 45, 60),
+        new WeaponProperties("Nunchaku", 40, 25, 20)
     };
 
     public static IReadOnlyList<Enemy> BossesInGame => _bossesInGame;
     private static Enemy[] _bossesInGame =
     {
-        new Enemy("Boss1", 500, 100),
-        new Enemy("Boss2", 1500, 300),
-        new Enemy("Final Boss", 5000, 600)
+        new Enemy("Boss1", 500, 80),
+        new Enemy("Boss2", 1000, 120),
+        new Enemy("Final Boss", 2000, 200)
     };
 
 }
