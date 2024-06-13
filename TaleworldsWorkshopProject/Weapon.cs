@@ -105,6 +105,11 @@ public class Weapon
 
     public void PowerUp(double factor)
     {
+        if (!Player.CallFromPlayer)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
         _attackPower = (int)(_attackPower * factor);
         _maxHealth = (int)(_maxHealth * factor);
         _health = (int)(_health * factor);

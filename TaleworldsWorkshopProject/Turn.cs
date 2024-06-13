@@ -2,6 +2,10 @@
 using System.Text;
 public class Turn
 {
+
+    public static bool CallFromTurn { get => _callFromTurn; }
+    private static bool _callFromTurn;
+
     private int _turnIndex;
     public IReadOnlyList<Enemy> Enemies { get => _enemies; }
     private Enemy[] _enemies = new Enemy[3];
@@ -31,7 +35,8 @@ public class Turn
             _enemies[i] = EntityFactory.EnemiesInGame[randomIndex];
         }
 
-        Console.WriteLine(_turnDescription());
+        StartTurn();
+        ListEnemies();
     }
 
     // turda karşılaşılan düşmanları yazdırır ve seçenekler playera gösterilir.
@@ -52,25 +57,25 @@ public class Turn
         return prompt.ToString();
     }
     // Her tur başladığında oyuncu ve düşmanları güçlendiren yöntem
-    public void StartTurn()
+    private void StartTurn()
     {
-        Console.WriteLine($"Turn {_turnIndex} started.");
+        Console.WriteLine($"Turn {_turnIndex} / 30 started.");
+        _callFromTurn = true;
         Player.Instance.PowerUp(1 + _turnIndex * 0.1); // Her turda oyuncuyu güçlendir
+        
         foreach (var enemy in _enemies)
         {
             enemy.PowerUp(1 + _turnIndex * 0.1); // Her turda düşmanları güçlendir
         }
+        _callFromTurn = false;
     }
-    public void EndTurn()
-    {
-        Console.WriteLine($"Turn {_turnIndex} ended.");
-    }
-    public void ListEnemies()
+    private void ListEnemies()
     {
         Console.WriteLine("Enemies in this turn:");
+        int index = 0;
         foreach (var enemy in _enemies)
         {
-            Console.WriteLine($"{enemy.Name} - Health: {enemy.Health}, Attack Power: {enemy.AttackPower}");
+            Console.WriteLine($"({index++}) {enemy.Name} - Health: {enemy.Health}, Attack Power: {enemy.AttackPower}");
         }
     }
 }

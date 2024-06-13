@@ -60,17 +60,16 @@ public class Game
         _inTurn = true;
     }
 
-    public  void Help()
+    public void Help()
     {
-        Console.WriteLine("\n----------------------HELP MENU----------------------");
-        ShowGameRules();
-
         if (_gameStarted)
         {
             Console.WriteLine("The help menu cannot be accessed while the game is running!");
-            return; 
+            return;
         }
 
+        Console.WriteLine("\n----------------------HELP MENU----------------------");
+        ShowGameRules();
         Console.WriteLine("\nİyi oyunlar!");
     }
     private void ShowGameRules()
@@ -279,7 +278,7 @@ public class Game
         Console.WriteLine($"Healed player for %{(int)healthPotion.EffectRatio}.");
     }
 
-    public void BuffWeapon()
+    public void BuyAttackPotion()
     {
         if (!_inShop)
         {

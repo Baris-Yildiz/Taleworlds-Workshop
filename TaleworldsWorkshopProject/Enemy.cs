@@ -43,6 +43,11 @@ public class Enemy
     }
     public void PowerUp(double factor)
     {
+        if (!Turn.CallFromTurn)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
         _health = (int)(_health * factor);
         _attackPower = (int)(_attackPower * factor);
         Console.WriteLine($"Enemy powered up! Health: {_health}, Attack Power: {_attackPower}");

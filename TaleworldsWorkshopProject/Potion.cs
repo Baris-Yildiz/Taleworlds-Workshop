@@ -18,6 +18,7 @@
         private Random _random = new Random();
 
         public Potion(Type type, int cost) {
+            
             _type = type;
             _effectRatio = (float)(_random.NextDouble() * 20.0); 
             _cost = cost;

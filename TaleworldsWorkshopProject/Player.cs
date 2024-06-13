@@ -120,10 +120,19 @@ public class Player
 
     public void PowerUp(double factor)
     {
+        if (!Turn.CallFromTurn)
+        {
+            Console.WriteLine("Invalid");
+            return;
+        }
         _health = (int)(_health * factor);
         _attackPower = (int)(_attackPower * factor);
         _gold = (int)(_gold * factor);
+
+        _callFromPlayer = true;
         _currentWeapon.PowerUp(factor);
+        _callFromPlayer = false;
+
         Console.WriteLine($"Player powered up! Health: {_health}, Attack Power: {_attackPower}, Gold: {_gold}");
     }
 
