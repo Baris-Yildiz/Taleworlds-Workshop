@@ -12,6 +12,12 @@ public class Turn
     // yeni bir tur oluşturur.
     public Turn(int turnIndex)
     {
+        if (!Game.CallFromGame)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
+
         _turnIndex = turnIndex;
         for (int i = 0; i < _enemies.Length; i++)
         {

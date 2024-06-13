@@ -1,6 +1,4 @@
 ﻿namespace TaleworldsWorkshopProject;
-
-
 public class Enemy
 {
     private string _name;
@@ -23,6 +21,11 @@ public class Enemy
     // Method to take damage
     public void TakeDamage(int damage)
     {
+        if (!CombatScene.CallFromCombatScene)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
         _health -= damage;
         if (_health < 0) _health = 0;
     }
@@ -30,6 +33,12 @@ public class Enemy
     // Method to attack
     public int Attack()
     {
+        if (!CombatScene.CallFromCombatScene)
+        {
+            Console.WriteLine("Invalid.");
+            return -1;
+        }
+
         return _random.Next((int)(_attackPower * 9.0/10.0), (int)(_attackPower * 11.0 / 10.0));
     }
 }

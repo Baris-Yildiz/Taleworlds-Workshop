@@ -22,7 +22,9 @@ public class Game
 
     private Shop _currentShop;
 
+    public bool InBossTurn { get => _inBossTurn;}
     private bool _inBossTurn = false;
+
     private BossTurn _currentBossTurn;
     private int _currentBossTurnIndex = 1;
 
@@ -38,6 +40,9 @@ public class Game
     private bool _escaped = false;
     int escapeAmount = 0;
 
+    public static bool CallFromGame { get => _callFromGame; }
+    private static bool _callFromGame = false;
+
     public void StartGame()
     {
         if (_gameStarted) {
@@ -49,14 +54,15 @@ public class Game
         _gameStarted = true;
         Console.WriteLine("Started new game! Advancing to the first turn.");
 
-
+        _callFromGame = true;
         _currentTurn = new Turn(_currentTurnIndex++);
+        _callFromGame = false;
         _inTurn = true;
     }
 
     public  void Help()
     {
-        Console.WriteLine("\n===== HELP MENU =====");
+        Console.WriteLine("\n----------------------HELP MENU----------------------");
         ShowGameRules();
 
         if (_gameStarted)
@@ -125,16 +131,22 @@ public class Game
         if (_currentTurnIndex % 3 == 0)
         {
             _inShop = true;
+            _callFromGame = true;
             _currentShop = new Shop();
+            _callFromGame = false;
         } else if (_currentTurnIndex % 10 == 0)
         {
             _inBossTurn = true;
+            _callFromGame = true;
             _currentBossTurn = new BossTurn(_currentBossTurnIndex++);
+            _callFromGame = false;
 
         } else
         {
             _inTurn = true;
+            _callFromGame = true;
             _currentTurn = new Turn(_currentTurnIndex);
+            _callFromGame = false;
         }
 
         _currentTurnIndex++;
@@ -195,8 +207,12 @@ public class Game
         }
 
         Enemy enemy = _currentTurn.Enemies[index]; 
+
         CombatScene combatScene = new CombatScene(new Enemy(enemy.Name, enemy.Health, enemy.AttackPower));
+
+        _callFromGame = true;
         combatScene.StartCombat();
+        _callFromGame = false;
 
         _escaped = true;
         Advance();
@@ -204,7 +220,7 @@ public class Game
 
     public void BuyWeapon(int index)
     {
-        if (!_inShop || !_gameStarted)
+        if (!_inShop)
         {
             Console.WriteLine("Invalid command.");
             return;
@@ -217,7 +233,9 @@ public class Game
         }
 
         WeaponProperties weaponProperties = _currentShop.WeaponProperties[index];
+        _callFromGame = true;
         Player.Instance.BuyWeapon(weaponProperties);
+        _callFromGame = false;
     }
 
     public void FightBoss()
@@ -230,7 +248,10 @@ public class Game
 
         Enemy boss = _currentBossTurn.Boss;
         CombatScene combatScene = new CombatScene(new Enemy(boss.Name, boss.Health, boss.AttackPower));
+
+        _callFromGame = true;
         combatScene.StartCombat();
+        _callFromGame = false;
 
         if (_gameStarted)
         {
@@ -251,7 +272,10 @@ public class Game
         Potion healthPotion = _currentShop.HealthPotion;
         Player player = Player.Instance;
 
+        _callFromGame = true;
         Player.Instance.HealPlayer((int)(healthPotion.EffectRatio * player.Health * 0.01f));
+        _callFromGame = false;
+
         Console.WriteLine($"Healed player for %{(int)healthPotion.EffectRatio}.");
     }
 
@@ -264,7 +288,9 @@ public class Game
         }
 
         Potion attackPotion = _currentShop.AttackPotion;
+        _callFromGame = true;
         Weapon.Instance.BuffWeapon((int)(attackPotion.EffectRatio * Weapon.Instance.AttackPower * 0.01f));
+        _callFromGame = false;
         Console.WriteLine($"Buffed weapon for %{(int)attackPotion.EffectRatio}.");
     }
 

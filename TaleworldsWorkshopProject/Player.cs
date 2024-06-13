@@ -6,6 +6,10 @@ public class Player
     private Weapon _currentWeapon;
     private int _gold;
     private int _initialHealth;
+
+    public static bool CallFromPlayer { get => _callFromPlayer; }
+    private static bool _callFromPlayer;
+
     //Oyuncumuza Player.Instance olarak erişebiliyoruz ve sadece 1 tane oyuncumuz olabiliyor.
     public static Player Instance
     {
@@ -40,6 +44,11 @@ public class Player
     // Method to take damage
     public void TakeDamage(int damage)
     {
+        if (!CombatScene.CallFromCombatScene)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
         _health -= damage;
         if (_health < 0) _health = 0;
     }
@@ -47,28 +56,58 @@ public class Player
     // Method to attack
     public int Attack()
     {
+        if (!CombatScene.CallFromCombatScene)
+        {
+            Console.WriteLine("Invalid.");
+            return -1;
+        }
+
         if (_currentWeapon.Health <= 0)
         {
             SwitchToFist();
         }
+
+        _callFromPlayer = true;
         _currentWeapon.UseWeapon();
+        _callFromPlayer = false;
+
         return _attackPower + _currentWeapon.CalculateAttackPower();
     }
+
     private void SwitchToFist()
     {
+        _callFromPlayer = true;
         Weapon.Instance.ChangeWeapon(new WeaponProperties("Fist", 1, int.MaxValue, 0));
+        _callFromPlayer = false;
     }
+
     public void EarnGold(int amount)
     {
+        if (!CombatScene.CallFromCombatScene)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
+
         _gold += amount;
         Console.WriteLine($"Player earned {amount} gold. Total gold: {_gold}");
     }
     public void BuyWeapon(WeaponProperties weaponProperties)
     {
+        if(!Game.CallFromGame)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
+
         if (_gold >= weaponProperties.Cost)
         {
             _gold -= weaponProperties.Cost;
+
+            _callFromPlayer = true;
             Weapon.Instance.ChangeWeapon(weaponProperties); 
+            _callFromPlayer = false;
+
             Console.WriteLine($"Bought {weaponProperties.Name} for {weaponProperties.Cost} gold.");
         }
         else
@@ -79,6 +118,12 @@ public class Player
 
     public void HealPlayer(int amount)
     {
+        if (!Game.CallFromGame)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
+
         if (_health + amount > _initialHealth)
         {
             _health = _initialHealth;

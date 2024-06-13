@@ -1,20 +1,14 @@
-﻿using System;
-using System.Xml.Linq;
-namespace TaleworldsWorkshopProject;
+﻿namespace TaleworldsWorkshopProject;
 public class Weapon
 {
     private string _name;
     private int _health;
     private int _attackPower;
     private int _maxHealth;
-    private Inventory _inventory = null;
     private Random _random;
     private Player _player;
     private bool _isFist;
     private int _cost;
-
-
-
 
     public int Cost { get => _cost; }
     public string Name { get => _name; }
@@ -48,6 +42,12 @@ public class Weapon
 
     public void UseWeapon()
     {
+        if (!Player.CallFromPlayer)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
+
         if (_isFist)
         {
             Console.WriteLine("Using Fist. Attack power is fixed.");
@@ -93,6 +93,11 @@ public class Weapon
 
     public void ChangeWeapon(WeaponProperties weaponProperties)
     {
+        if (!Player.CallFromPlayer)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
         _health = _maxHealth = weaponProperties.Durability;
         _attackPower = weaponProperties.AttackPower;
         _isFist = false;
@@ -100,6 +105,11 @@ public class Weapon
 
     public void BuffWeapon(int amount)
     {
+        if (!Game.CallFromGame)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
         _attackPower += amount;
     }
 }

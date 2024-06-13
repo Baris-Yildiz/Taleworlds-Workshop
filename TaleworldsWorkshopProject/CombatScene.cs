@@ -2,14 +2,27 @@
 public class CombatScene
 {
     Enemy enemy;
+    public static bool CallFromCombatScene { get => _callFromCombatScene; }
+    private static bool _callFromCombatScene;
 
     public CombatScene(Enemy enemy)
     {
+        if (!Game.CallFromGame)
+        {
+            return;
+        }
         this.enemy = enemy;
     }
 
     public void StartCombat()
     {
+        if (!Game.CallFromGame)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
+
+        _callFromCombatScene = true;
         Console.WriteLine("-----------------------COMBAT-----------------------");
         Console.WriteLine($"Player vs {enemy.Name}! Let the fight begin!\n");
         Player player = Player.Instance;
@@ -44,6 +57,7 @@ public class CombatScene
             Console.WriteLine("Enemy defeated! Proceeding to the next turn.");
         }
         Console.WriteLine("--------------------END OF COMBAT--------------------");
+        _callFromCombatScene = false;
     }
 }
 

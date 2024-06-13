@@ -18,6 +18,12 @@ public class Shop
     // shop constructorı içinde random 3 weapon belirlenir ve sunulur.
     public Shop()
     {
+        if (!Game.CallFromGame)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
+
         _weaponProperties = new WeaponProperties[3];
 
         for (int i = 0; i < _weaponProperties.Length; i++)
