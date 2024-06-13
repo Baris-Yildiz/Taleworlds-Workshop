@@ -57,37 +57,7 @@ public class Game
     public  void Help()
     {
         Console.WriteLine("\n===== HELP MENU =====");
-        
-        List<string> helpOptions = new List<string>
-            {
-                "1. Exit Game",
-                "2. Start Game",
-                "3. Game Rules"
-            };
-
-        helpOptions.ForEach(option => Console.WriteLine(option));
-
-        Console.WriteLine("Please choose an option:");
-
-        //string input = Console.ReadLine();
-        string input = "3";
-        switch (input)
-        {
-            case "1":
-                ExitGame();
-                break;
-            case "2":
-                StartGame();
-                break;
-                case "3":
-                ShowGameRules();
-                break;
-            default:
-                Console.WriteLine("Invalid option. Returning to the game.");
-                break;
-        }
-
-
+        ShowGameRules();
 
         if (_gameStarted)
         {
@@ -109,14 +79,9 @@ public class Game
                 "6 Tip silah mevcuttur.",
                 "Silahlar zamanla kırılabilir.",
                 "Enemy ile Fight sırasında sadece bir silah kullanabilirsin;eğer bu kullandığın silah kırılırsa default olarak yumruk kullanırsın (yumruk kırılamaz ve hep aynı hasarı vurur)",
-
-
-
             };
 
         gameRules.ForEach(rule => Console.WriteLine(rule));
-        //Console.WriteLine("\nReturning to help menu...");
-        //Help();
     }
 
     public void ExitGame()
