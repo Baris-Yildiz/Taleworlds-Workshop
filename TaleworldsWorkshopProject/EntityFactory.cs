@@ -15,9 +15,6 @@ public class EntityFactory
         new Enemy("Vampire", 100, 20),
         new Enemy("Werewolf", 150, 20),
         new Enemy("Lich", 180, 22)
-
-       
-
     };
 
     public static IReadOnlyList<WeaponProperties> WeaponsInGame => _weaponsInGame;

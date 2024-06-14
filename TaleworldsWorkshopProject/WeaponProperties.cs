@@ -1,6 +1,5 @@
 ﻿using System.Text;
 namespace TaleworldsWorkshopProject;
-// silah özellikleri belirten bir class. Shoplar ve düşmanlar bunu düşürür, alınırsa envantere eklenir ve kullanılırsa Weapon özelliklerine kopyalanır
 public struct WeaponProperties
 {
     public string Name { get => _name; }
@@ -16,7 +15,7 @@ public struct WeaponProperties
     private int _cost;
 
     public string Description { get => _description(); }
-    //düşmandan düşerse cost = 0.
+
     public WeaponProperties(string name, int power, int durability, int cost)
     {
         _name = name;
@@ -33,7 +32,7 @@ public struct WeaponProperties
         }
         _attackPower = (int)(AttackPower * factor);
     }
-    // weapon açıklaması. düşmandan düştüyse cost = 0 old. için açıklama değişir.
+
     private string _description()
     {
         string description = Name + " with " + AttackPower + " attack power and " + Durability + " durability.";
@@ -43,5 +42,4 @@ public struct WeaponProperties
         }
         return description + " Costs " + Cost + " gold.\n";
     }
-    
 }

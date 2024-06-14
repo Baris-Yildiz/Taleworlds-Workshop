@@ -1,16 +1,21 @@
 ﻿namespace TaleworldsWorkshopProject;
 public class Player
 {
-    private int _health;
-    private int _attackPower;
-    private Weapon _currentWeapon;
-    private int _gold;
-    private int _initialHealth;
-
     public static bool CallFromPlayer { get => _callFromPlayer; }
     private static bool _callFromPlayer;
 
-    //Oyuncumuza Player.Instance olarak erişebiliyoruz ve sadece 1 tane oyuncumuz olabiliyor.
+    public int Health { get => _health; }
+    private int _health;
+
+    public int AttackPower { get => _attackPower + _currentWeapon.CalculateAttackPower(); }
+    private int _attackPower;
+
+    public int Gold { get => _gold; }
+    private int _gold;
+
+    private int _initialHealth;
+    private Weapon _currentWeapon;
+
     public static Player Instance
     {
         get
@@ -25,8 +30,6 @@ public class Player
     }
 
     private static Player? _instance;
-
-    // player ilk değerlerini initialize eder.
    
     private Player()
     {
@@ -38,12 +41,6 @@ public class Player
         _currentWeapon = Weapon.Instance;
     }
 
-    public int Health { get => _health; }
-    public int Gold { get => _gold; }
-    public int AttackPower { get => _attackPower + _currentWeapon.CalculateAttackPower(); }
-
-
-    // Method to take damage
     public void TakeDamage(int damage)
     {
         if (!CombatScene.CallFromCombatScene)
@@ -55,7 +52,6 @@ public class Player
         if (_health < 0) _health = 0;
     }
 
-    // Method to attack
     public int Attack()
     {
         if (!CombatScene.CallFromCombatScene)

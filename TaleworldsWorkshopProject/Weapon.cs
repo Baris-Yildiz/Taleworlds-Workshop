@@ -13,7 +13,6 @@ public class Weapon
     public int Cost { get => _cost; }
     public string Name { get => _name; }
 
-    //Oyuncumuza Player.Instance olarak erişebiliyoruz ve sadece 1 tane oyuncumuz olabiliyor.
     public static Weapon Instance
     {
         get
@@ -30,10 +29,10 @@ public class Weapon
 
     private Weapon()
     {
-        _maxHealth = 100; // Initial maximum health of the weapon
-        _health = _maxHealth; // Set current health to maximum health
-        _attackPower = 50; // Initial base attack power of the weapon
-        _random = new Random(); // Initialize the random number generator
+        _maxHealth = 100; 
+        _health = _maxHealth; 
+        _attackPower = 50; 
+        _random = new Random(); 
         _isFist = false;
     }
 
@@ -55,13 +54,13 @@ public class Weapon
         }
         if (_health > 0)
         {
-            int healthReduction = _random.Next(1, 20); // Random health reduction between 5 and 15
+            int healthReduction = _random.Next(1, 20); 
             _health -= healthReduction;
-            if (_health < 0) _health = 0; // Ensure health doesn't go below 0
+            if (_health < 0) _health = 0; 
 
-            int attackReduction = _random.Next(1,5 ); // Random attack power reduction between 1 and 5
+            int attackReduction = _random.Next(1,5 ); 
             int currentAttackPower = CalculateAttackPower() - attackReduction;
-            if (currentAttackPower < 0) currentAttackPower = 0; // Ensure attack power doesn't go below 0
+            if (currentAttackPower < 0) currentAttackPower = 0; 
 
             Console.WriteLine($"Weapon used. Current weapon health: {_health}, Current weapon attack power: {currentAttackPower}");
 
@@ -76,18 +75,15 @@ public class Weapon
         }
     }
 
-    // Method to calculate the current attack power based on the weapon's health
     public int CalculateAttackPower()
     {
         return _isFist ? _attackPower : (int)((double)_health / _maxHealth * _attackPower);
     }
 
-    // Method to handle weapon breaking
     private void _breakWeapon()
     {
         Console.WriteLine("Weapon has been broken!");
         _isFist = true;
-        // Logic to remove the weapon from inventory or disable it
         _health = 0;
     }
 
@@ -134,7 +130,6 @@ public class Weapon
 
         _instance = null;
     }
-
 }
 
 

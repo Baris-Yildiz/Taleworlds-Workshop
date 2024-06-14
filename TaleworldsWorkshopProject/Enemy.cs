@@ -1,16 +1,17 @@
 ﻿namespace TaleworldsWorkshopProject;
 public class Enemy
 {
+    public string Name { get => _name; }
     private string _name;
+
+    public int Health { get => _health; }
     private int _health;
+
+    public int AttackPower { get => _attackPower; }
     private int _attackPower;
 
     private Random _random = new Random();
-
-    public string Name { get => _name; }
-    public int Health { get => _health; }
-    public int AttackPower { get => _attackPower; }
-
+    
     public Enemy(string name, int health = 80, int attackPower = 15)
     {
         _name = name;
@@ -18,7 +19,6 @@ public class Enemy
         _attackPower = attackPower;
     }
 
-    // Method to take damage
     public void TakeDamage(int damage)
     {
         if (!CombatScene.CallFromCombatScene)
@@ -30,7 +30,6 @@ public class Enemy
         if (_health < 0) _health = 0;
     }
 
-    // Method to attack
     public int Attack()
     {
         if (!CombatScene.CallFromCombatScene)

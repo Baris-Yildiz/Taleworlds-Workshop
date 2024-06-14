@@ -2,6 +2,12 @@
 {
     public class Potion
     {
+        public int EffectRatio { get => _effectRatio; }
+        private int _effectRatio;
+
+        public int Cost { get => _cost; }
+        private int _cost;
+
         public enum Type
         {
             Health,
@@ -9,11 +15,6 @@
         }
 
         private Type _type;
-        public int EffectRatio { get => _effectRatio; }
-        private int _effectRatio;
-
-        public int Cost { get => _cost; }
-        private int _cost;
 
         private Random _random = new Random();
 
