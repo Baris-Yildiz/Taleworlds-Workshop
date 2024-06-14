@@ -1,10 +1,11 @@
 ﻿namespace TaleworldsWorkshopProject;
 public class CombatScene
 {
-    Enemy _enemy;
-    Random _random = new Random();
     public static bool CallFromCombatScene { get => _callFromCombatScene; }
     private static bool _callFromCombatScene;
+
+    Enemy _enemy;
+    Random _random = new Random();
 
     public CombatScene(Enemy enemy)
     {

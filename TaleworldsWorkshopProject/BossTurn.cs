@@ -4,9 +4,10 @@ namespace TaleworldsWorkshopProject
 {
     public class BossTurn
     {
-        private int _turnIndex;
         public Enemy Boss { get => _boss; }
         private Enemy _boss;
+
+        private int _turnIndex;
 
         public BossTurn (int turnIndex)
         {

@@ -21,7 +21,6 @@ public class Shop
 
     private int _turnIndex;
 
-    // shop constructorı içinde random 3 weapon belirlenir ve sunulur.
     public Shop(int turnIndex)
     {
         if (!Game.CallFromGame)
@@ -56,7 +55,6 @@ public class Shop
         _turnIndex = turnIndex;
     }
 
-    // shoptaki itemleri konsola yazdırır.
     private string _shopDescription()
     {
         StringBuilder prompt = new StringBuilder();
@@ -79,6 +77,4 @@ public class Shop
         return prompt.ToString();
 
     }
-    
-
 }

@@ -5,14 +5,14 @@ public class Turn
     public static bool CallFromTurn { get => _callFromTurn; }
     private static bool _callFromTurn;
 
-    private int _turnIndex;
     public IReadOnlyList<Enemy> Enemies { get => _enemies; }
     private Enemy[] _enemies = new Enemy[3];
 
     private Random _randomNumberGenerator = new Random();
     private List<int> _pickedIndexes = new List<int>();
 
-    // yeni bir tur oluşturur.
+    private int _turnIndex;
+
     public Turn(int turnIndex)
     {
         
@@ -42,17 +42,16 @@ public class Turn
         Console.WriteLine("You can also choose to escape using Game.Instance.Escape().");
     }
 
-    // Her tur başladığında oyuncu ve düşmanları güçlendiren yöntem
     private void _startTurn()
     {
         Console.WriteLine($"Turn {_turnIndex} / 15 started.");
         if (_turnIndex > 1 ) {
             _callFromTurn = true;
-            Player.Instance.PowerUp(1 + _turnIndex * 0.05); // Her turda oyuncuyu güçlendir
+            Player.Instance.PowerUp(1 + _turnIndex * 0.05);
 
             foreach (var enemy in _enemies)
             {
-                enemy.PowerUp(1 + _turnIndex * 0.1); // Her turda düşmanları güçlendir
+                enemy.PowerUp(1 + _turnIndex * 0.1);
             }
             
             _callFromTurn = false;

@@ -105,7 +105,6 @@ public class Game
         _gameStarted=false;
     }
 
-    // bir sonraki tura geçer.
     public void Advance()
     {
         if (!_gameStarted)
@@ -315,21 +314,5 @@ public class Game
         Player.Instance.BuffWeapon(attackPotion);
         _callFromGame = false;
         Console.WriteLine($"Buffed weapon for {attackPotion.EffectRatio}.\nRemaining Gold: {Player.Instance.Gold} Current Attack Power: {Weapon.Instance.AttackPower}");
-    }
-
-    public static void Main(string[] args)
-    {
-        Game.Instance.StartGame();
-        Game.Instance.SelectEnemy(0);
-        Game.Instance.SelectEnemy(1);
-        Game.Instance.SelectEnemy(2);
-        Game.Instance.BuyHealthPotion();
-        Player.Instance.ShowStats();
-        Game.Instance.BuyHealthPotion();
-        Game.Instance.BuyWeapon(0);
-        Game.Instance.BuyAttackPotion();
-        Game.Instance.Advance();
-        Game.Instance.FightBoss();
-        // Display the number of command line arguments.
     }
 }
