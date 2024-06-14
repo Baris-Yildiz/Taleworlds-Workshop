@@ -8,7 +8,7 @@ public class EntityFactory
         new Enemy("Dwarf", 80, 15),
         new Enemy("Spider", 70, 12),
         new Enemy("Elemental", 100, 20),
-        new Enemy("Assasin", 50, 25),
+        new Enemy("Assasin", 40, 40),
         new Enemy("Zombie", 120, 18)
     };
 
@@ -26,9 +26,9 @@ public class EntityFactory
     public static IReadOnlyList<Enemy> BossesInGame => _bossesInGame;
     private static Enemy[] _bossesInGame =
     {
-        new Enemy("Boss1", 350, 25),
-        new Enemy("Boss2", 750, 50),
-        new Enemy("Final Boss", 1000, 60)
+        new Enemy("The Zombie Lord", 350, 25),
+        new Enemy("The Reckless One", 1000, 60),
+        new Enemy("The Golden Dragon", 5000, 90)
     };
 
 }
