@@ -66,20 +66,21 @@ public class Game
             Console.WriteLine("The help menu cannot be accessed while the game is running!");
             return;
         }
-        ShowGameRules();
+        _showGameRules();
         Console.WriteLine("Good luck!");
     }
-    private void ShowGameRules()
+    private void _showGameRules()
     {
         Console.WriteLine("\n----------------------GAME RULES----------------------");
         List<string> gameRules = new List<string>
             {
-                "The game consists of 30 turns.",
-                "Every third turn, there is a shop where you can buy weapons and potions with gold.",
-                "Every tenth turn, there is a mini-boss and at the end, you fight the final boss.",
+                "The game consists of 15 turns.",
+                "Every fourth turn, there is a shop where you can buy weapons and potions with gold.",
+                "Every fifth turn, there is a mini-boss and at the end, you fight the final boss.",
                 "Every other turn, you pick from three random enemies to fight with. The enemies get increasingly more difficult. You can also choose to escape.",
-                "Enemies and player always gets buffed at the start of turns.",
-                "Weapons have durabilities and they can break down in the middle of a combat. If your weapon breaks down, you use your fists. You can change weapons by buying a new one from the shop."
+                "Enemies and player get buffed at the start of turns.",
+                "Weapons have durabilities and they can break down in the middle of a combat. If your weapon breaks down, you use your fists. You can change weapons by buying a new one from the shop.",
+                "View your player's stats with Player.Instance.ShowStats()"
             };
 
         gameRules.ForEach(rule => Console.WriteLine(rule));
@@ -127,13 +128,6 @@ public class Game
         _inShop = false;
         _inTurn = false;
         _inBossTurn = false;
-
-        if (_currentBossTurnIndex == 16)
-        {
-            Console.WriteLine("You win!");
-            ExitGame();
-            return ;
-        }
 
         if (_currentTurnIndex % 4 == 0)
         {
@@ -262,6 +256,13 @@ public class Game
         combatScene.StartCombat();
         _callFromGame = false;
 
+        if (_currentBossTurnIndex >= 4)
+        {
+            Console.WriteLine("You win! Congratulations!!");
+            ExitGame();
+            return;
+        }
+
         if (_gameStarted)
         {
             _escaped = true;
@@ -318,8 +319,17 @@ public class Game
 
     public static void Main(string[] args)
     {
-        Game game = Game.Instance;
-        game.StartGame();
+        Game.Instance.StartGame();
+        Game.Instance.SelectEnemy(0);
+        Game.Instance.SelectEnemy(1);
+        Game.Instance.SelectEnemy(2);
+        Game.Instance.BuyHealthPotion();
+        Player.Instance.ShowStats();
+        Game.Instance.BuyHealthPotion();
+        Game.Instance.BuyWeapon(0);
+        Game.Instance.BuyAttackPotion();
+        Game.Instance.Advance();
+        Game.Instance.FightBoss();
         // Display the number of command line arguments.
     }
 }

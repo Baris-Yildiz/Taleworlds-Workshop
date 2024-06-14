@@ -67,7 +67,7 @@ public class Weapon
 
             if (_health == 0)
             {
-                BreakWeapon();
+                _breakWeapon();
             }
         }
         else
@@ -83,7 +83,7 @@ public class Weapon
     }
 
     // Method to handle weapon breaking
-    private void BreakWeapon()
+    private void _breakWeapon()
     {
         Console.WriteLine("Weapon has been broken!");
         _isFist = true;

@@ -26,6 +26,11 @@ public struct WeaponProperties
     }
     public void IncreaseStats(double factor)
     {
+        if (!Shop.CallFromShop)
+        {
+            Console.WriteLine("Invalid.");
+            return;
+        }
         _attackPower = (int)(AttackPower * factor);
     }
     // weapon açıklaması. düşmandan düştüyse cost = 0 old. için açıklama değişir.

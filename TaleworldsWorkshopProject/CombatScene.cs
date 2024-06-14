@@ -1,7 +1,7 @@
 ﻿namespace TaleworldsWorkshopProject;
 public class CombatScene
 {
-    Enemy enemy;
+    Enemy _enemy;
     Random _random = new Random();
     public static bool CallFromCombatScene { get => _callFromCombatScene; }
     private static bool _callFromCombatScene;
@@ -12,7 +12,7 @@ public class CombatScene
         {
             return;
         }
-        this.enemy = enemy;
+        _enemy = enemy;
     }
 
     public void StartCombat()
@@ -25,14 +25,14 @@ public class CombatScene
 
         _callFromCombatScene = true;
         Console.WriteLine("-----------------------COMBAT-----------------------\n");
-        Console.WriteLine($"Player vs {enemy.Name}! Let the fight begin!\n");
+        Console.WriteLine($"Player vs {_enemy.Name}! Let the fight begin!\n");
         Player player = Player.Instance;
 
-        while (player.Health > 0 && enemy.Health > 0)
+        while (player.Health > 0 && _enemy.Health > 0)
         {
             //enemy attacks player
-            Console.WriteLine($"{enemy.Name} attacks Player");
-            int enemyAttackPower = enemy.Attack();
+            Console.WriteLine($"{_enemy.Name} attacks Player");
+            int enemyAttackPower = _enemy.Attack();
             player.TakeDamage(enemyAttackPower);
             Console.WriteLine($"Player takes {enemyAttackPower} damage. Player health: {player.Health}\n");
             if (player.Health <= 0)
@@ -42,14 +42,23 @@ public class CombatScene
                 return;
             }
             //player attacks enemy 
-            Console.WriteLine($"Player attacks {enemy.Name}");
+            Console.WriteLine($"Player attacks {_enemy.Name}");
             int playerAttackPower=player.Attack();
-            enemy.TakeDamage(playerAttackPower);
-            Console.WriteLine($"Enemy takes {playerAttackPower} damage. {enemy.Name} health: {enemy.Health}\n");
-            if (enemy.Health <= 0)
+            _enemy.TakeDamage(playerAttackPower);
+            Console.WriteLine($"Enemy takes {playerAttackPower} damage. {_enemy.Name} health: {_enemy.Health}\n");
+            if (_enemy.Health <= 0)
             {
-                Console.WriteLine($"{enemy.Name} is dead.");
-                player.EarnGold(_random.Next(50,100));
+                Console.WriteLine($"{_enemy.Name} is dead.");
+                int goldAmount = _random.Next(50, 100);
+                foreach (Enemy e in EntityFactory.BossesInGame)
+                {
+                    if (e.Name.Equals(_enemy.Name))
+                    {
+                        goldAmount = _random.Next(300, 400);
+                        break;
+                    }
+                }
+                player.EarnGold(goldAmount);
             }
         }
 

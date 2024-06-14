@@ -2,8 +2,6 @@
 using System.Text;
 public class Turn
 {
-
-   
     public static bool CallFromTurn { get => _callFromTurn; }
     private static bool _callFromTurn;
 
@@ -12,7 +10,7 @@ public class Turn
     private Enemy[] _enemies = new Enemy[3];
 
     private Random _randomNumberGenerator = new Random();
-    private List<int> pickedIndexes = new List<int>();
+    private List<int> _pickedIndexes = new List<int>();
 
     // yeni bir tur oluşturur.
     public Turn(int turnIndex)
@@ -28,22 +26,24 @@ public class Turn
         for (int i = 0; i < _enemies.Length; i++)
         {
             int randomIndex = _randomNumberGenerator.Next(0, EntityFactory.EnemiesInGame.Count);
-            while (pickedIndexes.Contains(randomIndex))
+            while (_pickedIndexes.Contains(randomIndex))
             {
                 randomIndex = _randomNumberGenerator.Next(0, EntityFactory.EnemiesInGame.Count);
             }
-            pickedIndexes.Add(randomIndex);
+            _pickedIndexes.Add(randomIndex);
 
             Enemy enemy = EntityFactory.EnemiesInGame[randomIndex];
             _enemies[i] = new Enemy(enemy.Name, enemy.Health, enemy.AttackPower);
         }
 
-        StartTurn();
-        ListEnemies();
+        _startTurn();
+        _listEnemies();
+        Console.WriteLine("You can fight one of these enemies using Game.Instance.SelectEnemy(x), x being 0, 1 or 2.");
+        Console.WriteLine("You can also choose to escape using Game.Instance.Escape().");
     }
 
     // Her tur başladığında oyuncu ve düşmanları güçlendiren yöntem
-    private void StartTurn()
+    private void _startTurn()
     {
         Console.WriteLine($"Turn {_turnIndex} / 15 started.");
         if (_turnIndex > 1 ) {
@@ -59,7 +59,7 @@ public class Turn
         }
     }
 
-    private void ListEnemies()
+    private void _listEnemies()
     {
         Console.WriteLine("Enemies in this turn:");
         int index = 0;

@@ -66,7 +66,7 @@ public class Player
 
         if (_currentWeapon.Health <= 0)
         {
-            SwitchToFist();
+            _switchToFist();
         }
 
         _callFromPlayer = true;
@@ -76,7 +76,7 @@ public class Player
         return _attackPower + _currentWeapon.CalculateAttackPower();
     }
 
-    private void SwitchToFist()
+    private void _switchToFist()
     {
         _callFromPlayer = true;
         Weapon.Instance.ChangeWeapon(new WeaponProperties("Fist", 1, int.MaxValue, 0));
@@ -127,7 +127,6 @@ public class Player
         }
         _health = (int)(_health * factor);
         _attackPower = (int)(_attackPower * factor);
-        
 
         _callFromPlayer = true;
         _currentWeapon.PowerUp(factor);

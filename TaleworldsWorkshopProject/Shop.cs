@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Numerics;
 using System.Text;
 namespace TaleworldsWorkshopProject;
 public class Shop
@@ -7,13 +8,16 @@ public class Shop
     private WeaponProperties[] _weaponProperties;
 
     Random _randomNumberGenerator = new Random();
-    List<int> pickedIndexes = new List<int>();
+    List<int> _pickedIndexes = new List<int>();
 
-    public Potion HealthPotion { get => healthPotion; }
-    private Potion healthPotion;
+    public static bool CallFromShop { get => _callFromShop; }
+    private static bool _callFromShop = false;
 
-    public Potion AttackPotion { get => attackPotion; }
-    private Potion attackPotion;
+    public Potion HealthPotion { get => _healthPotion; }
+    private Potion _healthPotion;
+
+    public Potion AttackPotion { get => _attackPotion; }
+    private Potion _attackPotion;
 
     private int _turnIndex;
 
@@ -31,29 +35,25 @@ public class Shop
         for (int i = 0; i < _weaponProperties.Length; i++)
         {
             int randomIndex = _randomNumberGenerator.Next(0, EntityFactory.WeaponsInGame.Count);
-            while (pickedIndexes.Contains(randomIndex))
+            while (_pickedIndexes.Contains(randomIndex))
             {
                 randomIndex = _randomNumberGenerator.Next(0, EntityFactory.WeaponsInGame.Count);
             }
-            pickedIndexes.Add(randomIndex);
+            _pickedIndexes.Add(randomIndex);
 
             WeaponProperties weaponProperties = EntityFactory.WeaponsInGame[randomIndex];
             _weaponProperties[i] = new WeaponProperties(weaponProperties.Name, weaponProperties.AttackPower, weaponProperties.Durability, weaponProperties.Cost);
+            _callFromShop = true;
+            _weaponProperties[i].IncreaseStats(1 + _turnIndex * 0.1);
+            _callFromShop = false;
         }
 
-        IncreaseWeaponStats(1 + _turnIndex * 0.1);
-        healthPotion = new Potion(Potion.Type.Health, _randomNumberGenerator.Next(50, 70));
-        attackPotion = new Potion(Potion.Type.Attack, _randomNumberGenerator.Next(50, 70));
+
+        _healthPotion = new Potion(Potion.Type.Health, _randomNumberGenerator.Next(50, 70));
+        _attackPotion = new Potion(Potion.Type.Attack, _randomNumberGenerator.Next(50, 70));
 
         Console.WriteLine(_shopDescription());
         _turnIndex = turnIndex;
-    }
-    public void IncreaseWeaponStats(double factor)
-    {
-        for (int i = 0; i < _weaponProperties.Length; i++)
-        {
-            _weaponProperties[i].IncreaseStats(factor);
-        }
     }
 
     // shoptaki itemleri konsola yazdırır.
@@ -70,8 +70,8 @@ public class Shop
         }
 
         prompt.AppendLine("\nYou can buy one of these weapons and equip it using the Game.Instance.BuyWeapon() method.");
-        prompt.AppendLine($"\nYou can buy a Health Potion for {healthPotion.Cost} gold using the Game.Instance.BuyHealthPotion() method.");
-        prompt.AppendLine($"\nYou can buy an Attack Potion for {attackPotion.Cost} gold using the Game.Instance.BuyAttackPotion() method.");
+        prompt.AppendLine($"\nYou can buy a Health Potion for {_healthPotion.Cost} gold using the Game.Instance.BuyHealthPotion() method.");
+        prompt.AppendLine($"\nYou can buy an Attack Potion for {_attackPotion.Cost} gold using the Game.Instance.BuyAttackPotion() method.");
 
         prompt.AppendLine($"Exit the shop and advance to the next turn using Game.Instance.Advance().");
         prompt.AppendLine("---------------------END OF SHOP---------------------");
