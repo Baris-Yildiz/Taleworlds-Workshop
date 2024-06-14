@@ -8,12 +8,16 @@ public class EntityFactory
         new Enemy("Dwarf", 80, 15),
         new Enemy("Spider", 70, 12),
         new Enemy("Elemental", 100, 20),
+
         new Enemy("Assasin", 50, 25),
         new Enemy("Zombie", 120, 18),
         new Enemy("Dark Elf", 80, 12),
         new Enemy("Vampire", 120, 18),
         new Enemy("Werewolf", 150, 20),
         new Enemy("Lich", 180, 22)
+
+       
+
     };
 
     public static IReadOnlyList<WeaponProperties> WeaponsInGame => _weaponsInGame;
@@ -33,9 +37,12 @@ public class EntityFactory
     public static IReadOnlyList<Enemy> BossesInGame => _bossesInGame;
     private static Enemy[] _bossesInGame =
     {
-         new Enemy("Fire Lord", 500, 50),
-         new Enemy("Ice Queen", 600, 55),
-         new Enemy("Thunder King", 700, 60),
+
+         
+        new Enemy("Fire Lord", 350, 25),
+        new Enemy("Ice Queen", 1000, 60),
+        new Enemy("Thunder King", 5000, 90)
+
     };
 
 }

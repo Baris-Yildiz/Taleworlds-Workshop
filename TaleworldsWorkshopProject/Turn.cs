@@ -48,7 +48,7 @@ public class Turn
         Console.WriteLine($"Turn {_turnIndex} / 15 started.");
         if (_turnIndex > 1 ) {
             _callFromTurn = true;
-            Player.Instance.PowerUp(1 + _turnIndex * 0.1); // Her turda oyuncuyu güçlendir
+            Player.Instance.PowerUp(1 + _turnIndex * 0.05); // Her turda oyuncuyu güçlendir
 
             foreach (var enemy in _enemies)
             {
