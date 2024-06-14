@@ -9,8 +9,6 @@ public class Game
         {
             if (_instance == null)
             {
-                Console.WriteLine("Welcome to Dungeon Run!");
-
                 _instance = new Game();
             }
             return _instance;
@@ -317,5 +315,10 @@ public class Game
         Player.Instance.BuffWeapon(attackPotion);
         _callFromGame = false;
         Console.WriteLine($"Buffed weapon for {attackPotion.EffectRatio}.\nRemaining Gold: {Player.Instance.Gold} Current Attack Power: {Weapon.Instance.AttackPower}");
+    }
+
+    public static void Main(string[] args)
+    {
+
     }
 }
