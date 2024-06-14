@@ -31,7 +31,7 @@ public class Player
     private Player()
     {
         _gold = 300;
-        _health = 200;
+        _health = 100;
         _attackPower = 25;
         _health = _initialHealth = 100;
         _attackPower = 10;
@@ -145,15 +145,7 @@ public class Player
 
         int amount = potion.EffectRatio;
         _gold -= potion.Cost;
-
-        if (_health + amount > _initialHealth)
-        {
-            _health = _initialHealth;
-        } else
-        {
-            _health += amount;
-        }
-        
+        _health += amount;
     }
 
     public void BuffWeapon(Potion potion)

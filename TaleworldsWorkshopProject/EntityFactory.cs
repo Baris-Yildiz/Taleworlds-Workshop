@@ -7,12 +7,12 @@ public class EntityFactory
         new Enemy("Goblin", 60, 10),
         new Enemy("Dwarf", 80, 15),
         new Enemy("Spider", 70, 12),
-        new Enemy("Elemental", 100, 20),
+        new Enemy("Elemental", 90, 17),
 
         new Enemy("Assasin", 50, 25),
         new Enemy("Zombie", 120, 18),
         new Enemy("Dark Elf", 80, 12),
-        new Enemy("Vampire", 120, 18),
+        new Enemy("Vampire", 100, 20),
         new Enemy("Werewolf", 150, 20),
         new Enemy("Lich", 180, 22)
 
@@ -29,7 +29,7 @@ public class EntityFactory
         new WeaponProperties("Mace", 80, 120, 40),
         new WeaponProperties("Katana", 140, 100, 80),
         new WeaponProperties("Nunchaku", 60, 300, 20),
-        new WeaponProperties("Flaming Sword", 35, 250, 180),
+        new WeaponProperties("Flaming Sword", 120, 100, 250),
         new WeaponProperties("Ice Dagger", 25, 150, 120),
         new WeaponProperties("Thunder Axe", 45, 300, 220)
     };
@@ -40,8 +40,8 @@ public class EntityFactory
 
          
         new Enemy("Fire Lord", 350, 25),
-        new Enemy("Ice Queen", 1000, 60),
-        new Enemy("Thunder King", 5000, 90)
+        new Enemy("Ice Queen", 800, 40),
+        new Enemy("Thunder King", 2000, 70)
 
     };
 
