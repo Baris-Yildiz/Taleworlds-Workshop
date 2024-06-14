@@ -9,6 +9,8 @@ public class Game
         {
             if (_instance == null)
             {
+                Console.WriteLine("Welcome to Dungeon Run!");
+
                 _instance = new Game();
             }
             return _instance;
@@ -71,6 +73,7 @@ public class Game
     }
     private void _showGameRules()
     {
+        Console.WriteLine("Welcome to Dungeon Run!");
         Console.WriteLine("\n----------------------GAME RULES----------------------");
         List<string> gameRules = new List<string>
             {
