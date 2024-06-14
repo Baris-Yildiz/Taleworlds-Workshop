@@ -30,9 +30,9 @@ public class Player
    
     private Player()
     {
-        _gold = 500;
-        _health = 150;
-        _attackPower = 20;
+        _gold = 300;
+        _health = 200;
+        _attackPower = 25;
         _health = _initialHealth = 100;
         _attackPower = 10;
         _currentWeapon = Weapon.Instance;
